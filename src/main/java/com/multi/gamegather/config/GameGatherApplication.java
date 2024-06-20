@@ -1,13 +1,13 @@
-package com.multi.gamegather;
+package com.multi.gamegather.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GamegatherApplication {
+public class GameGatherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GamegatherApplication.class, args);
+		SpringApplication.run(GameGatherApplication.class, args);
 	}
 
 }
