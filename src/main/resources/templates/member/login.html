@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>Insert title here</title>
+    <style>
+        h5 {
+            color: red;
+        }
+
+        div>button, input[type=submit] {
+            width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<br>
+<h1 align="center">Game Gather</h1>
+
+<br><br>
+<Br>
+<div align="center">
+    <form action="/member/loginProc" method="post" id="loginForm">
+        <table>
+            <tr>
+                <td>
+                    <div>
+                        <span>아이디</span>
+                    </div>
+                    <input type="text" name="username">
+                    <!-- !! user name 고정 - 시큐리티 내부 핸들러 메소드 !! -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <span>비밀번호</span>
+                    </div>
+                    <input type="password" name="password">
+                    <!-- !! passwordd 고정 - 시큐리티 내부 핸들러 메소드 !! -->
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div>
+        <input type="submit" value="login">
+        <br>
+        <a href="/member/signup">Sign Up</a>
+        <br>
+        <button>아이디 / 비밀번호 찾기</button>
+    </div>
+
+     <script>
+        $(function(){
+            $("input[name=username]").focus();
+            $("input[type=submit]").click(function(){
+                $("#loginForm").submit();
+            });
+        });
+    </script>
+<!--    </script>-->
+</div>
+</body>
+</html>
