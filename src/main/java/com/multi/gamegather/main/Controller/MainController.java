@@ -9,7 +9,7 @@ public class MainController {
 
     @GetMapping("/")
     public String main(){
-        return "main/main";
+        return "club/club";
     }
 
     @PostMapping("/")
