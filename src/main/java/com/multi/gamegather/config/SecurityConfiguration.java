@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -27,12 +28,15 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/member/login", "/member/signup","/chat/**", "/club/**").permitAll()
 //                        .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().permitAll()
-                );
+                )
+                .headers(headers -> headers
+                        .frameOptions().sameOrigin());
 //        http
 //                .formLogin((auth) -> auth.loginPage("/member/login")
 //                        .loginProcessingUrl("/loginProc")
 //                        .permitAll()
 //                );
+
 
         return http.build();
     }
