@@ -27,7 +27,9 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/member/login", "/member/signup","/chat/**", "/club/**").permitAll()
 //                        .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().permitAll()
-                );
+                )
+                .headers(headers -> headers
+                        .frameOptions().sameOrigin());
 //        http
 //                .formLogin((auth) -> auth.loginPage("/member/login")
 //                        .loginProcessingUrl("/loginProc")

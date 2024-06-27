@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.gamegather.club.model.dao.ClubManagementMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+<!--    <resultMap type="com.multi.gamegather.club.model.dto.ClubManagementDTO" id="clubManagementMapper">-->
+<!--        <id property="id" column="ID"/>-->
+<!--        <result property="clubId" column="CLUB_ID"/>-->
+<!--        <result property="userId" column="USER_ID"/>-->
+<!--        <result property="role" column="CLUB_STATUS"/>-->
+<!--    </resultMap>-->
+
+
+    <insert id="createClubManagement">
+        INSERT INTO TB_CLUB_MANAGEMENT (USER_ID, CLUB_ID, CLUB_STATUS) VALUES (#{userId}, #{clubId}, #{role})
+    </insert>
+
+
+
+
+<!--    <select id="getUsers" resultType="com.example.model.User">-->
+<!--        SELECT * FROM users-->
+<!--    </select>-->
+
+<!--    <insert id="insertUser" parameterType="com.example.model.User">-->
+<!--        INSERT INTO users (username, password) VALUES (#{username}, #{password})-->
+<!--    </insert>-->
+</mapper>
