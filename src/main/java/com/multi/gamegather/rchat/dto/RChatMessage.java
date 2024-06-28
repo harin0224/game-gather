@@ -15,4 +15,11 @@ public class RChatMessage {
     private String roomId;
     private String sender;
     private String message;
+
+
+
+    public RChatMessage(String sender) {
+        this.sender = sender;
+    }
+
 }

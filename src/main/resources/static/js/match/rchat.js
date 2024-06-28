@@ -1,6 +1,5 @@
 var stompClient = null;
-// 전체 응답 데이터를 문자열로 받아온다고 가정
-
+var connectionTimeout;
 
 // HTML 제어
 function setConnected(connected) {
@@ -18,17 +17,59 @@ function setConnected(connected) {
 // 소켓 연결해서 기능 불러오기
 // 구독
 function connect() {
+
+    console.log(roomId);
+//    var roomId = $("#roomId").val();
+    if (!roomId) {
+        alert("Please enter a room ID.");
+        return;
+    }
+
     var socket = new SockJS('/ws-websocket');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
+
+    // 3초 동안 연결 시도
+    connectionTimeout = setTimeout(function() {
+        if (stompClient.connected) {
+            return;
+        }
+        console.log('Connection timeout. Disconnecting...');
+        disconnect();
+    }, 3000);
+
+    stompClient.connect({ roomId: roomId }, function (frame) {
+        clearTimeout(connectionTimeout);
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/sub/rchat/test', function (greeting) { // 받을거
-        console.log('greeting: ' + greeting);
-        showGreeting(greeting);
+        stompClient.subscribe('/sub/rchat/' + roomId, function (greeting) { // 받을거
+            console.log('greeting: ' + greeting);
+            showGreeting(greeting);
         });
     });
 }
+//function connect() {
+//    var socket = new SockJS('/ws-websocket');
+//    stompClient = Stomp.over(socket);
+//
+//    // 3초 동안 연결 시도
+//    connectionTimeout = setTimeout(function() {
+//        if (stompClient.connected) {
+//            return;
+//        }
+//        console.log('Connection timeout. Disconnecting...');
+//        disconnect();
+//    }, 3000);
+//
+//    stompClient.connect({}, function (frame) {
+//        clearTimeout(connectionTimeout);
+//        setConnected(true);
+//        console.log('Connected: ' + frame);
+//        stompClient.subscribe('/sub/rchat/test', function (greeting) { // 받을거
+//        console.log('greeting: ' + greeting);
+//        showGreeting(greeting);
+//        });
+//    });
+//}
 
 function disconnect() {
     if (stompClient !== null) {
@@ -37,12 +78,13 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-
 function sendName() {
-    stompClient.send("/pub/rchat/hello", {}, JSON.stringify({'name': $("#name").val()}));
+//    var roomId = $("#roomId").val();
+    stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
-
-
+//function sendName() {
+//    stompClient.send("/pub/rchat/hello", {}, JSON.stringify({'name': $("#name").val()}));
+//}
 
 function showGreeting(message) {
     console.log(message);

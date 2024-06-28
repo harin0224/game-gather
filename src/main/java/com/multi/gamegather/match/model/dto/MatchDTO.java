@@ -14,6 +14,10 @@ public class MatchDTO {
 
     }
 
+    public MatchDTO(String gamename) {
+        this.gamename = gamename;
+    }
+
     public MatchDTO(String gamename, String headcnt, String tag1, String tag2, String tag3, String age) {
         this.gamename = gamename;
         this.headcnt = headcnt;
