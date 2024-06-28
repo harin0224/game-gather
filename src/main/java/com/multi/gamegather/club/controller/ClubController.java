@@ -1,11 +1,13 @@
 package com.multi.gamegather.club.controller;
 
+import com.multi.gamegather.authentication.model.dto.CustomUser;
 import com.multi.gamegather.club.model.dto.CreateClubRequestDTO;
 import com.multi.gamegather.club.model.dto.HelloMessageDTO;
 import com.multi.gamegather.club.service.ClubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
@@ -43,10 +45,10 @@ public class ClubController {
 
     @PostMapping
     public void createRoom(
-        @RequestBody CreateClubRequestDTO data
-        // ,@CurrentUser UserDetails currentUser
+        @RequestBody CreateClubRequestDTO data,
+        @AuthenticationPrincipal CustomUser currentUser
     ) {
-        // data.setUserId(currentUser.getId());
+        data.setUserId(currentUser.getNo());
         System.out.println("1");
         clubService.createClub(data);
 
