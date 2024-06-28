@@ -5,12 +5,12 @@ spring:
     username: scott
     password: tiger
 
-
-
 server:
   port: 8100
-
 
 spring-boot:
   run:
     jvmArguments: -parameters
+
+file:
+  upload-dir: classpath:/profileIMG/
