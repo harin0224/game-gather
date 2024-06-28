@@ -10,6 +10,9 @@ public interface ClubCategoryRelationMapper {
 
 
     int clubCategoryRelationMapper(int clubId, List<ClubCategoryDTO> data);
+    void deleteClubCategoryRelationByClubId(int clubId);
+
+
 
     ClubManagementDTO findByUsername(String username);
     void deleteUser(Long userId);

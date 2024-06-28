@@ -13,7 +13,7 @@
 
 
 
-
+    <!-- 클럽 카테고리 관계 데이터 생성 -->
     <insert id="clubCategoryRelationMapper">
         INSERT INTO CLUB_CATEGORY_RELATION (CLUB_ID, CATEGORY_ID) VALUES
         <foreach collection="data" item="category" separator=",">
@@ -21,6 +21,10 @@
         </foreach>
     </insert>
 
+    <!-- 클럽 카테고리 관계 데이터 삭제 -->
+    <delete id="deleteClubCategoryRelationByClubId">
+        DELETE FROM CLUB_CATEGORY_RELATION WHERE CLUB_ID = #{clubId}
+    </delete>
 
 
 

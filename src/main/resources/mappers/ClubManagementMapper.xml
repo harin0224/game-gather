@@ -12,16 +12,22 @@
 <!--    </resultMap>-->
 
 
+    <!-- 클럽 관리 데이터 생성 -->
     <insert id="createClubManagement">
         INSERT INTO TB_CLUB_MANAGEMENT (USER_ID, CLUB_ID, CLUB_STATUS) VALUES (#{userId}, #{clubId}, #{role})
     </insert>
 
+    <!-- 클럽 관리 데이터 삭제 -->
+    <delete id="deleteClubManagementByClubId">
+        DELETE FROM TB_CLUB_MANAGEMENT WHERE CLUB_ID = #{clubId}
+    </delete>
+
+    <!-- 클럽의 관리자인지 확인 -->
+    <select id="getUserStatus" resultType="java.lang.String">
+        SELECT CLUB_STATUS FROM TB_CLUB_MANAGEMENT WHERE USER_ID = #{userId} AND CLUB_ID = #{clubId}
+    </select>
 
 
-
-<!--    <select id="getUsers" resultType="com.example.model.User">-->
-<!--        SELECT * FROM users-->
-<!--    </select>-->
 
 <!--    <insert id="insertUser" parameterType="com.example.model.User">-->
 <!--        INSERT INTO users (username, password) VALUES (#{username}, #{password})-->

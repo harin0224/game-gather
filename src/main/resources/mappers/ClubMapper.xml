@@ -10,6 +10,7 @@
 <!--        <result property="name" column="CLUB_NAME"/>-->
 <!--    </resultMap>-->
 
+    <!-- 클럽 데이터 생성 -->
     <insert id="createClub" useGeneratedKeys="true" keyProperty="id">
         INSERT
         INTO TB_CLUB(
@@ -20,5 +21,10 @@
             #{name}
         )
     </insert>
+
+    <!-- 클럽 데이터 삭제 -->
+    <delete id="deleteClub">
+        DELETE FROM TB_club WHERE ID = #{clubId}
+    </delete>
 
 </mapper>
