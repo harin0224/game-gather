@@ -5,9 +5,7 @@ import com.multi.gamegather.member.model.dao.MemberDAO;
 import com.multi.gamegather.member.model.dto.MemberDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class AuthenticationServiceImpl implements UserDetailsService {
+public class AuthenticationServiceImpl implements AuthenticationService{
 
     private final MemberDAO memberDAO;
 
@@ -53,5 +51,22 @@ public class AuthenticationServiceImpl implements UserDetailsService {
         System.out.println(authorities);
 
         return new CustomUser(memberDTO, authorities);
+    }
+
+
+    @Override
+    public Map<String, List<String>> getPermitListMap() {
+        Map<String, List<String>> permitListMap = new HashMap<>();
+        List<String> adminPermitList = new ArrayList<>();
+        List<String> memberPermitList = new ArrayList<>();
+
+        adminPermitList.add("/admin/dashboard");
+        memberPermitList.add("/order/regist");
+
+        permitListMap.put("adminPermitList", adminPermitList);
+        permitListMap.put("memberPermitList", memberPermitList);
+
+        return permitListMap;
+
     }
 }

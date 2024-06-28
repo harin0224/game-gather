@@ -1,13 +1,9 @@
 package com.multi.gamegather.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.gamegather.authentication.model.service.AuthenticationService;
-import com.multi.gamegather.authentication.model.service.AuthenticationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -22,6 +18,7 @@ import java.util.Map;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     private final AuthenticationService authenticationService;
 
     @Autowired
@@ -42,15 +39,15 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-//        Map<String, List<String>> permitListMap = authenticationService.getPermitListMap();
-//        List<String> adminPermitList = permitListMap.get("adminPermitList");
-//        List<String> memberPermitList = permitListMap.get("memberPermitList");
+        Map<String, List<String>> permitListMap = authenticationService.getPermitListMap();
+        List<String> adminPermitList = permitListMap.get("adminPermitList");
+        List<String> memberPermitList = permitListMap.get("memberPermitList");
 
-//        adminPermitList.forEach(url -> System.out.println("admin permit list : " + url));
-//        memberPermitList.forEach(url -> System.out.println("member permit list : " + url));
+        adminPermitList.forEach(url -> System.out.println("admin permit list : " + url));
+        memberPermitList.forEach(url -> System.out.println("member permit list : " + url));
 
         http
-                .csrf((auth) ->auth.disable()
+                .csrf((auth) -> auth.disable()
                 )
                 .authorizeHttpRequests((auth) -> auth
 //                        .requestMatchers("/member/login", "/member/signup").permitAll()
@@ -62,7 +59,7 @@ public class SecurityConfiguration {
                         .loginPage(("/member/login"))
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/member/mypage", true)
+                        .defaultSuccessUrl("/main/main", true)
                         .failureForwardUrl("/error/login")
                 );
         http
