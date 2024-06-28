@@ -17,4 +17,10 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/test")            // 오류 있음
+    public String club(){
+        return "main/a";
+    }
+
+
 }

@@ -31,8 +31,9 @@ public class ClubController {
 //        return "club/club";
 //    }
 
+
     @GetMapping("/club")            // 오류 있음
-    public String club(){
+    public String test(){
         return "club/club";
     }
 
@@ -48,6 +49,7 @@ public class ClubController {
         @RequestBody CreateClubRequestDTO data,
         @AuthenticationPrincipal CustomUser currentUser
     ) {
+        System.out.println("1111 : " + currentUser.toString());
         data.setUserId(currentUser.getNo());
         System.out.println("1");
         clubService.createClub(data);

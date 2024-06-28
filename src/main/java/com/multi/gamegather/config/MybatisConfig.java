@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan(basePackages = "com.multi.gamegather")
+@MapperScan(basePackages = {"com.multi.gamegather"} , annotationClass = Mapper.class)
 public class MybatisConfig {
 
     @Bean
