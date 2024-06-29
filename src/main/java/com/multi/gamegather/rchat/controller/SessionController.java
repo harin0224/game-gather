@@ -8,38 +8,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SessionController {
+    int count = 1;
+    @GetMapping("/session/setting")
+    public ResponseEntity<String> getRoomId(HttpSession session) {
 
-    @GetMapping("/session/gamename")
-    public ResponseEntity<String> getGamename(HttpSession session) {
         String setting2 = (String)session.getAttribute("setting2");
+        String headcnt = (String)session.getAttribute("Headcnt");
+
+        int usermax = Integer.parseInt(headcnt);
+        if(count > usermax){
+            setting2 = setting2 + count;
+            count = 1;
+        }
+
+
+
         if (setting2 != null) {
+            count++;
             return ResponseEntity.ok(setting2);
+
         } else {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
     }
 }
-//@Controller
-//@RequestMapping("/session")
-//public class SessionController {
-//
-//    @Autowired
-//    private MatchDTO matchDTO;
-//
-//    @GetMapping("/gamename")
-//    @ResponseBody
-//    public String getGamename() {
-//        return matchDTO.getGamename();
-//    }
-//}
-
-//
-//@GetMapping("/session/gamename")
-//public ResponseEntity<String> getGamename(HttpSession session) {
-//    String gamename = (String) session.getAttribute("gamename");
-//    if (gamename != null) {
-//        return ResponseEntity.ok(gamename);
-//    } else {
-//        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//    }
-//}

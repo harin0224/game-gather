@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.gamegather.rchat.chatlog.model.dao.RChatLogMapper">
+    <resultMap type="com.multi.gamegather.rchat.chatlog.model.dto.RChatLogDTO" id="LogResultMap">
+        <result property="rchatcontent" column="CHAT_CONTENT"/>
+        <result property="rchattime" column="CHAT_TIME"/>
+    </resultMap>
+
+    <insert id="insertLog">
+        INSERT INTO LOGTEST (CHAT_CONTENT, CHAT_TIME)
+        VALUES (#{rchatcontent}, #{rchattime})
+    </insert>
+</mapper>

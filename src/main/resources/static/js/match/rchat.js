@@ -70,18 +70,50 @@ function connect() {
 //        });
 //    });
 //}
+function saveChatLogs() {
+    var chatLogs = [];
+    $("#greetings tr td").each(function() {
+        chatLogs.push({
+            message: $(this).text(),
+            timestamp: new Date().toJSON()  // 다른 형식의 타임스탬프
+        });
+    });
+
+    console.log("Chat logs to save: ", chatLogs);
+
+    $.ajax({
+        url: "/rchat/save-chat-logs",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(chatLogs),
+        success: function(response) {
+            console.log("Chat logs saved successfully: " + response);
+        },
+        error: function(error) {
+            console.log("Error saving chat logs: " + error);
+        }
+    });
+}
 
 function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
+        saveChatLogs();
     }
     setConnected(false);
     console.log("Disconnected");
 }
 function sendName() {
-//    var roomId = $("#roomId").val();
-    stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    let currentTime = new Date().toISOString(); // 현재 시간을 ISO 포맷으로 가져옵니다.
+    stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({
+        'name': $("#name").val(),
+        'timestamp': currentTime // 타임스탬프 추가
+    }));
 }
+//function sendName() {
+////    var roomId = $("#roomId").val();
+//    stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({'name': $("#name").val()}));
+//}
 //function sendName() {
 //    stompClient.send("/pub/rchat/hello", {}, JSON.stringify({'name': $("#name").val()}));
 //}
@@ -99,3 +131,11 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
 });
+
+//function disconnect() {
+//      if (stompClient !== null) {
+//          stompClient.disconnect();
+//      }
+//      setConnected(false);
+//      console.log("Disconnected");
+//  }

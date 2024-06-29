@@ -38,23 +38,11 @@ public class MatchController {
     public ModelAndView setMatch(ModelAndView mv, MatchDTO setting, HttpSession session, Locale locale) throws Exception {
         // 세션에 setting 데이터를 저장합니다.
         session.setAttribute("setting", setting);
-
-
-
-        String settinggamename = setting.getGamename();
-        session.setAttribute("gamename", settinggamename);
+        String Headcnt = setting.getHeadcnt();
+        session.setAttribute("Headcnt", Headcnt);
 
         String setting2 = setting.getGamename() + setting.getHeadcnt() + setting.getTag1() + setting.getTag2() + setting.getTag3() + setting.getAge();
         session.setAttribute("setting2", setting2);
-
-
-
-
-
-
-
-        MatchDTO savedSetting = (MatchDTO)session.getAttribute("setting");
-
 
         matchService.setMatch(setting);
 
