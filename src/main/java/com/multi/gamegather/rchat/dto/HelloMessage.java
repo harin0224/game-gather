@@ -10,5 +10,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HelloMessage {
-    private String name;
+    private String chatting;
 }

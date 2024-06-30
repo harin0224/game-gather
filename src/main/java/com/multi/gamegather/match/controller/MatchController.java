@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.Locale;
 
 @Controller
@@ -35,7 +36,7 @@ public class MatchController {
     }
 
     @PostMapping("match")
-    public ModelAndView setMatch(ModelAndView mv, MatchDTO setting, HttpSession session, Locale locale) throws Exception {
+    public ModelAndView setMatch(ModelAndView mv, MatchDTO setting, HttpSession session, Locale locale, Principal principal) throws Exception {
         // 세션에 setting 데이터를 저장합니다.
         session.setAttribute("setting", setting);
         String Headcnt = setting.getHeadcnt();
@@ -44,6 +45,8 @@ public class MatchController {
         String setting2 = setting.getGamename() + setting.getHeadcnt() + setting.getTag1() + setting.getTag2() + setting.getTag3() + setting.getAge();
         session.setAttribute("setting2", setting2);
 
+        String username = principal.getName();
+        setting.setUserid(username);
         matchService.setMatch(setting);
 
 

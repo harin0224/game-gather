@@ -103,10 +103,10 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-function sendName() {
+function sendChatting() {
     let currentTime = new Date().toISOString(); // 현재 시간을 ISO 포맷으로 가져옵니다.
     stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({
-        'name': $("#name").val(),
+        'chatting': $("#chatting").val(),
         'timestamp': currentTime // 타임스탬프 추가
     }));
 }
@@ -129,7 +129,7 @@ $(function () {
     });
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { sendChatting(); });
 });
 
 //function disconnect() {

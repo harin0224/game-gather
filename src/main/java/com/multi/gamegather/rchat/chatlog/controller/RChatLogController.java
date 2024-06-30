@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -26,7 +27,7 @@ public class RChatLogController {
 
     @PostMapping("/save-chat-logs")
     @ResponseBody
-    public String saveChatLogs(@RequestBody List<Map<String, String>> chatLogs) {
+    public String saveChatLogs(@RequestBody List<Map<String, String>> chatLogs, Principal principal) {
         System.out.println("saveChatLogs called");
         try {
             for (Map<String, String> chatLog : chatLogs) {
@@ -34,6 +35,8 @@ public class RChatLogController {
                 RChatLogDTO rChatLogDTO = new RChatLogDTO();
                 rChatLogDTO.setRchatcontent(chatLog.get("message"));
                 String timestamp = chatLog.get("timestamp");
+                String username = principal.getName();
+                rChatLogDTO.setUserid(username);
                 if (timestamp != null) {
                     try {
                         LocalDateTime parsedTime = LocalDateTime.parse(timestamp);

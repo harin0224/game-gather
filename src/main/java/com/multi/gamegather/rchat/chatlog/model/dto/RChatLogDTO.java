@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class RChatLogDTO {
     private String rchatcontent;
     private LocalDateTime rchattime;
+    private String userid;
     // + getter, setter
 
 

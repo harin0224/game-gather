@@ -6,6 +6,7 @@
 <mapper namespace="com.multi.gamegather.match.model.dao.MatchMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
 
     <resultMap type="com.multi.gamegather.match.model.dto.MatchDTO" id="matchResultMap">
+        <result property="userid" column="USER_ID"/>
         <result property="gamename" column="GAMENAME"/>
         <result property="headcnt" column="HEADCNT"/>
         <result property="tag1" column="TAG1"/>
@@ -18,7 +19,8 @@
         INSERT
         INTO TESTTEST
             (
-               GAMENAME
+               USER_ID
+             , GAMENAME
              , HEADCNT
              , TAG1
              , TAG2
@@ -27,7 +29,8 @@
         )
         VALUES
             (
-              #{ gamename }
+              #{ userid }
+            , #{ gamename }
             , #{ headcnt }
             , #{ tag1 }
             , #{ tag2 }

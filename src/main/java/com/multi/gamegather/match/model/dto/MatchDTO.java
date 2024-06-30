@@ -2,6 +2,7 @@ package com.multi.gamegather.match.model.dto;
 
 public class MatchDTO {
 
+    private String userid;
     private String gamename;
     private String headcnt;
     private String tag1;
@@ -25,6 +26,14 @@ public class MatchDTO {
         this.tag2 = tag2;
         this.tag3 = tag3;
         this.age = age;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getGamename() {
