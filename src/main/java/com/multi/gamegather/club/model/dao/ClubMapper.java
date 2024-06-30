@@ -8,6 +8,7 @@ public interface ClubMapper {
     // 입력된 클럽 정보로 클럽 생성
     int createClub(CreateClubRequestDTO data);
     void deleteClub(int clubCode);
+    int getClubIdByCode(String clubCode);
 }
 
 

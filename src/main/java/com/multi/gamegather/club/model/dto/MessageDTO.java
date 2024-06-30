@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MessageDTO {
     private String message;
-    private String senderId;
+    private int senderId;
 
     @Override
     public String toString() {

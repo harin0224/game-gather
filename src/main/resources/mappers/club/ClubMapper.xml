@@ -27,4 +27,9 @@
         DELETE FROM TB_club WHERE ID = #{clubId}
     </delete>
 
+    <!-- 클럽 코드로 클럽 아이디 찾기 -->
+    <select id="getClubIdByCode" resultType="java.lang.Integer">
+        SELECT id FROM TB_CLUB WHERE club_code = #{clubCode}
+    </select>
+
 </mapper>

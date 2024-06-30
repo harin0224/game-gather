@@ -22,49 +22,11 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/sub/club/receive-message/' + clubCode , function (greeting) { // 받을거
-        console.log('greeting: ' + greeting);
-            showGreeting(greeting);
-        });
     });
 }
 
 //1. 방 만들때 생성자한테 연결
 //2. 사람이 방 들어갔을 때 연결
-//3. 리스트 가져오는거(세션 다시 킬때마다 리스트 다시 다 연결해줘야하는거)
-
-
-
-//function connect() {
-//    console.log(roomId);
-//    var clubCode = $("#clubCode").val();
-//    if (!clubCode) {
-//        alert("Please enter a club room ID.");
-//        return;
-//    }
-//
-//    var socket = new SockJS('/ws-websocket');
-//    stompClient = Stomp.over(socket);
-//
-//    // 3초 동안 연결 시도
-//    connectionTimeout = setTimeout(function() {
-//        if (stompClient.connected) {
-//            return;
-//        }
-//        console.log('Connection timeout. Disconnecting...');
-//        disconnect();
-//    }, 3000);
-//
-//    stompClient.connect({ clubCode: clubCode }, function (frame) {
-//        clearTimeout(connectionTimeout);
-//        setConnected(true);
-//        console.log('Connected: ' + frame);
-//        stompClient.subscribe('/sub/club/' + clubCode, function (greeting) { // 받을거
-//            console.log('greeting: ' + greeting);
-//            showGreeting(greeting);
-//        });
-//    });
-//}
 
 function disconnect() {
     if (stompClient !== null) {
@@ -85,10 +47,17 @@ function showGreeting(message) {
 
 // 가입된 클럽 리스트 가져오는 부분
 function getClubList() {
-    axios.get('/club')
+    axios.get('/club/list')
         .then(response => {
             console.log("club Code: ", response.data);
+            const clubList = response.data;
             document.getElementById("clubList").innerHTML = response.data;
+
+            //3. 리스트 가져오는거(세션 다시 킬때마다 리스트 다시 다 연결해줘야하는거)
+            clubList.forEach(club => {
+                stompClient.subscribe('/sub/club/receive-message/' + club.id , function (greeting) { // 받을거
+                    });
+            });
         })
         .catch(error => console.error(error));
 }
@@ -105,6 +74,33 @@ function sendMessage() {
         })
     );
 }
+
+function loadClubChat() {
+     axios.get(`/club/chat?id=${$("#loadClubChat").val()}`)
+    .then(response => {
+        // 처리로직
+        const data = response.data
+
+        console.log('chat log : ', data)
+    })
+    .catch(error => console.error(error));
+}
+
+function kickUser() {
+    axios.patch(`/club/member`,{
+        clubId: document.getElementById("kickClubId").value,
+        userId: document.getElementById("kickUserId").value
+    })
+    .then(response => {
+        // 처리로직
+        const data = response.data
+
+        console.log('kick user : ', data)
+    })
+    .catch(error => console.error(error));
+}
+
+
 
 
 // 클럽 삭제 기능
@@ -148,7 +144,7 @@ function enterClub() {
     })
     .then(response => {
         console.log("enterClub  club: ", response.data);
-        stompClient.subscribe('/sub/club/receive-message/' + response.data?.id, function (data) {
+        stompClient.subscribe('/sub/club/receive-message/' + response.data, function (data) {
             console.log('greeting: ' + data);
         });
     })
@@ -158,3 +154,19 @@ function enterClub() {
 $(function () {
     connect();
 });
+
+// 클럽 탈퇴할 때
+function exitClub() {
+
+    console.log('document.getElementById("exitClub").value : ', document.getElementById("exitClub").value)
+    axios.delete('/club/exit', {
+        data:{
+            id: document.getElementById("exitClub").value
+        }
+    })
+    .then(response => {
+        console.log("exitClub  club: ", response.data);
+        stompClient.unsubscribe('/sub/club/receive-message/' + response.data);
+    })
+    .catch(error => console.error(error));
+}

@@ -27,6 +27,43 @@
         SELECT CLUB_STATUS FROM TB_CLUB_MANAGEMENT WHERE USER_ID = #{userId} AND CLUB_ID = #{clubId}
     </select>
 
+    <!-- 로그인된 사용자의 가입된 클럽 목록 가져오기 -->
+    <select id="findUserClubs" resultType="com.multi.gamegather.club.model.dto.ClubDTO">
+        SELECT c.id, c.club_name AS name, c.club_code AS code, cm.club_status AS status
+        FROM tb_club_management cm
+        JOIN tb_club c ON cm.club_id = c.id
+        WHERE cm.user_id = #{userId}
+    </select>
+
+    <select id="findUserByClub" resultType="int">
+        SELECT cm.user_id as userId
+        FROM tb_club_management cm
+        WHERE cm.club_id = #{club_id}
+    </select>
+
+
+    <!-- 클럽 가입 -->
+    <insert id="addUser">
+        INSERT INTO TB_CLUB_MANAGEMENT (USER_ID, CLUB_ID, CLUB_STATUS) VALUES (#{userId}, #{clubId}, "COMMON")
+    </insert>
+
+    <!-- 클럽 내 유저 삭제 -->
+    <delete id="deleteUser">
+        DELETE FROM TB_CLUB_MANAGEMENT WHERE USER_ID = #{userId} AND CLUB_ID = #{clubId}
+    </delete>
+
+
+    <!-- 클럽 내 유저 삭제 -->
+    <update id="kickUser">
+        UPDATE TB_CLUB_MANAGEMENT
+        SET
+        CLUB_STATUS = "KICK"
+        WHERE club_id = #{clubId} and user_id = ${userId}
+    </update>
+
+
+
+
 
 
 <!--    <insert id="insertUser" parameterType="com.example.model.User">-->

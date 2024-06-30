@@ -3,12 +3,16 @@ package com.multi.gamegather.club.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.gamegather.authentication.model.dto.CustomUser;
 import com.multi.gamegather.club.model.dao.ClubCategoryRelationMapper;
+import com.multi.gamegather.club.model.dao.ClubChatMapper;
 import com.multi.gamegather.club.model.dao.ClubManagementMapper;
 import com.multi.gamegather.club.model.dao.ClubMapper;
-import com.multi.gamegather.club.model.dto.ClubManagementDTO;
-import com.multi.gamegather.club.model.dto.CreateClubRequestDTO;
+import com.multi.gamegather.club.model.dto.*;
+import com.multi.gamegather.member.model.dao.MemberDAO;
+import com.multi.gamegather.member.model.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +32,8 @@ public class ClubService {
     private final ClubManagementMapper clubManagementMapper;
     private final ClubMapper clubMapper;
     private final ClubCategoryRelationMapper clubCategoryRelationMapper;
-
+    private final ClubChatMapper clubChatMapper;
+    private final MemberDAO memberDAO;
     // 룸 목록, 필요없음
     // private Map<String, ClubRoom> clubRooms;
 //    private Map<String, ClubRoomDTO> clubRooms;
@@ -109,12 +115,67 @@ public class ClubService {
 
     }
 
+    // 가입된 클럽 목록 가져오기
+    @Transactional
+    public List<ClubDTO> getClubList(int userId) {
+        System.out.println("service");
+        List<ClubDTO> list = clubManagementMapper.findUserClubs(userId);
+
+
+        for (ClubDTO club : list) {
+            List<Integer> userIds = clubManagementMapper.findUserByClub(club.getId());
+            String idsString = userIds.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
+            System.out.println("idsString : " + idsString);
+            List<MemberDTO> users = memberDAO.findMemberByNos(userIds);
+            System.out.println("size : " + users.size());
+            club.setMembers(users);
+        }
+
+
+        return list;
+    }
+
     // 채팅방 가입
+    @Transactional
+    public int joinClub(String clubCode, int userId) {
+        System.out.println("clubCode: " + clubCode);
+        System.out.println("userId : " + userId);
+        int clubId = clubMapper.getClubIdByCode(clubCode);
+        System.out.println("clubId: " + clubId);
 
-    // 채팅방 탈퇴
-    
-    
-    
+        clubManagementMapper.addUser(userId, clubId);
 
+        return clubId;
+    }
 
+    // 채팅방 나가기
+    @Transactional
+    public void deleteUser(int userId, int clubId) {
+        clubManagementMapper.deleteUser(userId, clubId);
+    }
+
+    // 채팅 저장하기
+    @Transactional
+    public void saveChat(int clubId, int userId, String message) {
+        System.out.println("clubId: " + clubId + "senderId: " + userId + "message: " + message);
+        clubChatMapper.saveChat(clubId, userId, message);
+    }
+
+    // 채팅 불러오기
+    public List<ChatLogDTO> getChat(int clubId) {
+        System.out.println("clubId: " + clubId);
+        List<ChatLogDTO> list = clubChatMapper.getChatLog(clubId);
+        System.out.println("list: " + ToStringBuilder.reflectionToString(list.get(0), ToStringStyle.JSON_STYLE));
+        return list;
+    }
+
+    public void kickUser(ClubManagementDTO data) {
+        int userId = data.getUserId();
+        int clubId = data.getClubId();
+
+        System.out.println("userId : " + userId + " clubId: " + clubId);
+        clubManagementMapper.kickUser(userId, clubId);
+    }
 }

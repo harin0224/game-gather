@@ -1,10 +1,8 @@
 package com.multi.gamegather.club.controller;
 
 import com.multi.gamegather.authentication.model.dto.CustomUser;
-import com.multi.gamegather.club.model.dto.ClubDTO;
-import com.multi.gamegather.club.model.dto.CreateClubRequestDTO;
-import com.multi.gamegather.club.model.dto.HelloMessageDTO;
-import com.multi.gamegather.club.model.dto.MessageDTO;
+import com.multi.gamegather.club.model.dao.ClubChatMapper;
+import com.multi.gamegather.club.model.dto.*;
 import com.multi.gamegather.club.service.ClubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -13,6 +11,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController //@Controller
@@ -45,23 +45,64 @@ public class ClubController {
 
 
     // 메세지 보내기
-    @MessageMapping("/club/send-message/{clubCode}")
-    @SendTo("/sub/club/receive-message/{clubCode}")
+    @MessageMapping("/club/send-message/{clubId}")
+    @SendTo("/sub/club/receive-message/{clubId}")
     public MessageDTO messageManager(
-            @DestinationVariable String clubCode,
+            @DestinationVariable int clubId,
             MessageDTO message
     ) throws Exception {
-        System.out.println("Get From " + clubCode + " send to " + message.getMessage());
+        clubService.saveChat(clubId, message.getSenderId(), message.getMessage());
+        System.out.println("Get From " + clubId + " send to " + message.getMessage());
         return message;
     }
     
     // 방 삭제하기
     @DeleteMapping
-    public void DeleteRoom(
+    public void deleteRoom(
         @RequestBody ClubDTO clubDTO,
         @AuthenticationPrincipal CustomUser currentUser){
 
         clubService.deleteClub(clubDTO.getId(), currentUser.getNo());
     }
 
+
+    // 방 목록 출력
+    @GetMapping("/list")
+    public List<ClubDTO> getClubList(
+        @AuthenticationPrincipal CustomUser currentUser) {
+        return clubService.getClubList(currentUser.getNo());
+    }
+
+    @PostMapping("/join")
+    public int joinClub(
+            @RequestBody ClubDTO data,
+            @AuthenticationPrincipal CustomUser currentUser
+    ) {
+        return clubService.joinClub(data.getCode(), currentUser.getNo());
+    }
+
+    @DeleteMapping("/exit")
+    public int exitClub(
+            @RequestBody ClubDTO data,
+            @AuthenticationPrincipal CustomUser currentUser
+    ){
+        System.out.println("Id: " + data.getId());
+        clubService.deleteUser(currentUser.getNo(), data.getId());
+        return data.getId();
+    }
+
+    @GetMapping("/chat")
+    public List<ChatLogDTO> loadClubChat(
+            @RequestParam int id
+    ) {
+        return clubService.getChat(id);
+    }
+
+
+    @PatchMapping("/member")
+    public void kickUser(
+            @RequestBody ClubManagementDTO data
+    ) {
+         clubService.kickUser(data);
+    }
 }
