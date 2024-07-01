@@ -12,7 +12,7 @@ public interface MemberDAO {
 
     void insertMember(MemberDTO member);
 
-    static void updateMember(MemberDTO memberDTO) {
+    void updateMember(MemberDTO memberDTO);
 
-    }
+    void deleteMember(String id);
 }

@@ -37,7 +37,6 @@ public class ClubService {
         return clubRooms.get(roomId);
     }
 
-
     // 채팅방 생성
     public ClubRoom createRoom(String name){
         String randomId = UUID.randomUUID().toString();

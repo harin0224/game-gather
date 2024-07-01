@@ -3,7 +3,6 @@ package com.multi.gamegather.authentication.model.dto;
 import com.multi.gamegather.member.model.dto.MemberDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-
 import java.sql.Timestamp;
 import java.util.Collection;
 

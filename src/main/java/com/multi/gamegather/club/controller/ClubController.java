@@ -6,7 +6,6 @@ import com.multi.gamegather.club.dto.HelloMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
@@ -22,16 +21,6 @@ public class ClubController {
 
      private final ChatService chatService;
 
-//    @RequestMapping("/")
-//    public String club(){
-//        return "redirect:/club/club";
-//    }
-
-//    @GetMapping("/home")
-//    public String club(){
-//        return "club/club";
-//    }
-
     @GetMapping("/club")            // 오류 있음
     public String club(){
         return "club/club";
@@ -41,7 +30,6 @@ public class ClubController {
     public String club2(){
         return "redirect:/club";
     }
-
 
     @PostMapping
     public ChatRoom createRoom(@RequestParam String name){
@@ -59,5 +47,4 @@ public class ClubController {
         System.out.println("123123123");
         return ("Hello, " + HtmlUtils.htmlEscape(message.getName()) + "!");
     }
-
 }

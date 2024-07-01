@@ -13,4 +13,4 @@ spring-boot:
     jvmArguments: -parameters
 
 file:
-  upload-dir: classpath:/profileIMG/
+  upload-dir: /uploads/profileIMG

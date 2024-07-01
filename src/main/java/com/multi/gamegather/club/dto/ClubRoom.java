@@ -21,7 +21,6 @@ public class ClubRoom {
         this.name = name;
     }
 
-    // 로직인가?
     public void handleActions(WebSocketSession session, ClubMessage clubMessage, ChatService chatService){
         if(clubMessage.getType().equals(ClubMessage.MessageType.ENTER)){
             sessions.add(session);
