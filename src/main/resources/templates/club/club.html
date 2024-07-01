@@ -1,53 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/main.css" rel="stylesheet">
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="/js/club/club.js"></script>
+<!--    <script type="text/javascript">-->
+<!--        let clubCode = null;-->
+
+<!--        $(document).ready(function() {-->
+<!--            $.ajax({-->
+<!--                url: '/session/gamename',-->
+<!--                method: 'GET',-->
+<!--                success: function(data) {-->
+<!--                    clubCode = data;-->
+<!--                    console.log("club Code: " + clubCode);-->
+<!--                },-->
+<!--                error: function() {-->
+<!--                    console.log("Failed to get the room ID from session.");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 </head>
 <body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
-    enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Greetings</th>
-                </tr>
-                </thead>
-                <tbody id="greetings">
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+<div id="clubList">
 </div>
+
+<button id="getClubBtn" onclick="getClubList()">클럽 목록 가져오기</button>
+
+<input id="currentClubId" type="number" placeholder="보내고싶은 클럽 id 입력">
+<input type="text" id="message"  placeholder="메세지 입력"/>
+<button id="sendMessageBtn" onclick="sendMessage()">메세지 보내기</button>
+
+
+<input id="deleteClubId" type="number" placeholder="지우고 싶은 클럽 id 입력">
+<button id="deleteClubBtn" onclick="deleteClub()">클럽 지우기</button>
+
+
+<button id="addClub" onclick="addClub()">클럽 추가</button>
+
+<input id="enterClub" placeholder="입장할 방 코드">
+<button id="enterClubBtn" onclick="enterClub()">입장</button>
+
+<input id="exitClub" type="number" placeholder="나가고 싶은 클럽 id 입력">
+<button id="exitClubBtn" onclick="exitClub()">클럽 나가기</button>
+
+<input id="loadClubChat" type="number" placeholder="대화 내역 가져올 클럽 id 입력">
+<button id="loadClubChatBtn" onclick="loadClubChat()">대화 내역 가져오기</button>
+
+
+
+
+<input id="kickClubId" type="number" placeholder="추방할 클럽 id 입력">
+<input id="kickUserId" type="number" placeholder="추방할 사람 id 입력">
+<button id="kickBtn" onclick="kickUser()">추방</button>
+
 </body>
 </html>

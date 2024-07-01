@@ -53,14 +53,18 @@ public class SecurityConfiguration {
 //                        .requestMatchers("/member/login", "/member/signup").permitAll()
 //                        .anyRequest().authenticated()
                                 .anyRequest().permitAll()
+
                 ).headers(headers -> headers
                  .frameOptions().sameOrigin());
+
         http
                 .formLogin(form -> form
                         .loginPage(("/member/login"))
                         .usernameParameter("username")
                         .passwordParameter("password")
+
                         .defaultSuccessUrl("/match/matchchat", true)
+
                         .failureForwardUrl("/error/login")
                 );
         http
