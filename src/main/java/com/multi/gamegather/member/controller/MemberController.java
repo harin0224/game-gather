@@ -65,13 +65,14 @@ public class MemberController {
 
         try {
             // 절대 경로 설정
-            Path uploadPath = Paths.get(System.getProperty("user.dir"), uploadDir);
+            Path currentPath = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
+            Path uploadPath = currentPath.resolve("src/main/resources/static").resolve(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
 
             // 고유한 파일명 생성
-            String uniqueFileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+            String uniqueFileName = UUID.randomUUID().toString().substring(0, 8) + "_" + file.getOriginalFilename();
             Path filePath = uploadPath.resolve(uniqueFileName);
 
             // 디버깅을 위한 경로 출력
