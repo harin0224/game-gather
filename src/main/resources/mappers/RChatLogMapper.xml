@@ -7,11 +7,14 @@
     <resultMap type="com.multi.gamegather.rchat.chatlog.model.dto.RChatLogDTO" id="LogResultMap">
         <result property="userid" column="USER_ID"/>
         <result property="rchatcontent" column="CHAT_CONTENT"/>
-        <result property="rchattime" column="CHAT_TIME"/>
     </resultMap>
 
     <insert id="insertLog">
-        INSERT INTO LOGTEST (CHAT_TYPE, USER_ID, CHAT_CONTENT, CHAT_TIME)
-        VALUES ('RCHAT', #{userid}, #{rchatcontent}, #{rchattime})
+        INSERT INTO LOGTEST (CHAT_TYPE, USER_ID, CHAT_CONTENT)
+        VALUES ('RCHAT', #{userid}, #{rchatcontent})
     </insert>
+
+    <select id="selectLog">
+        SELECT * FROM LOGTEST WHERE = #{userid}
+    </select>
 </mapper>

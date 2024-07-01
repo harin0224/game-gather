@@ -21,8 +21,6 @@ public class SessionController {
             count = 1;
         }
 
-
-
         if (setting2 != null) {
             count++;
             return ResponseEntity.ok(setting2);

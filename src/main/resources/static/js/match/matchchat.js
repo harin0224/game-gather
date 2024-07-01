@@ -11,21 +11,6 @@ document.getElementById('randommatch').addEventListener('click', () => {
   }
 });
 
-//document.addEventListener('DOMContentLoaded', () => {
-//  const randomMatchButton = document.getElementById('randommatch');
-//  const rchatStartButton = document.getElementById('rchatstart');
-//
-//  if (randomMatchButton) {
-//    randomMatchButton.addEventListener('click', () => {
-//      document.getElementById('iframecontent').src = '/match/match';
-//            if (rchatStartButton) {
-//              rchatStartButton.addEventListener('click', () => {
-//                document.getElementById('iframecontent').src = '/templates/rmatch/rmatch.html';
-//              });
-//            }
-//    });
-//  }
-//});
 
 
 

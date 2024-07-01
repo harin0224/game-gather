@@ -19,4 +19,9 @@ public class RChatLogServiceImpl implements RChatLogService {
     public void saveLog(RChatLogDTO rChatLogDTO) {
         rChatLogMapper.insertLog(rChatLogDTO);
     }
+
+    @Override
+    public void selectLog(RChatLogDTO rChatLogDTO) {
+        rChatLogMapper.selectLog(rChatLogDTO);
+    }
 }
