@@ -34,7 +34,7 @@ public class RChatController {
         String username = principal.getName();
         RChatMessage rChatMessage = new RChatMessage(username);
 
-        return (rChatMessage.getSender() + " : " + message.getChatting() + "!");
+        return (rChatMessage.getSender() + " : " + message.getChatting());
     }
 
 }

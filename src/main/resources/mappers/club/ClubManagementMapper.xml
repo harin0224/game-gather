@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.gamegather.club.model.dao.ClubManagementMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+<!--    <resultMap type="com.multi.gamegather.club.model.dto.ClubManagementDTO" id="clubManagementMapper">-->
+<!--        <id property="id" column="ID"/>-->
+<!--        <result property="clubId" column="CLUB_ID"/>-->
+<!--        <result property="userId" column="USER_ID"/>-->
+<!--        <result property="role" column="CLUB_STATUS"/>-->
+<!--    </resultMap>-->
+
+
+    <!-- 클럽 관리 데이터 생성 -->
+    <insert id="createClubManagement">
+        INSERT INTO TB_CLUB_MANAGEMENT (USER_ID, CLUB_ID, CLUB_STATUS) VALUES (#{userId}, #{clubId}, #{role})
+    </insert>
+
+    <!-- 클럽 관리 데이터 삭제 -->
+    <delete id="deleteClubManagementByClubId">
+        DELETE FROM TB_CLUB_MANAGEMENT WHERE CLUB_ID = #{clubId}
+    </delete>
+
+    <!-- 클럽의 관리자인지 확인 -->
+    <select id="getUserStatus" resultType="java.lang.String">
+        SELECT CLUB_STATUS FROM TB_CLUB_MANAGEMENT WHERE USER_ID = #{userId} AND CLUB_ID = #{clubId}
+    </select>
+
+    <!-- 로그인된 사용자의 가입된 클럽 목록 가져오기 -->
+    <select id="findUserClubs" resultType="com.multi.gamegather.club.model.dto.ClubDTO">
+        SELECT c.id, c.club_name AS name, c.club_code AS code, cm.club_status AS status
+        FROM tb_club_management cm
+        JOIN tb_club c ON cm.club_id = c.id
+        WHERE cm.user_id = #{userId}
+    </select>
+
+    <select id="findUserByClub" resultType="int">
+        SELECT cm.user_id as userId
+        FROM tb_club_management cm
+        WHERE cm.club_id = #{club_id}
+    </select>
+
+
+    <!-- 클럽 가입 -->
+    <insert id="addUser">
+        INSERT INTO TB_CLUB_MANAGEMENT (USER_ID, CLUB_ID, CLUB_STATUS) VALUES (#{userId}, #{clubId}, "COMMON")
+    </insert>
+
+    <!-- 클럽 내 유저 삭제 -->
+    <delete id="deleteUser">
+        DELETE FROM TB_CLUB_MANAGEMENT WHERE USER_ID = #{userId} AND CLUB_ID = #{clubId}
+    </delete>
+
+
+    <!-- 클럽 내 유저 삭제 -->
+    <update id="kickUser">
+        UPDATE TB_CLUB_MANAGEMENT
+        SET
+        CLUB_STATUS = "KICK"
+        WHERE club_id = #{clubId} and user_id = ${userId}
+    </update>
+
+
+
+
+
+
+<!--    <insert id="insertUser" parameterType="com.example.model.User">-->
+<!--        INSERT INTO users (username, password) VALUES (#{username}, #{password})-->
+<!--    </insert>-->
+</mapper>

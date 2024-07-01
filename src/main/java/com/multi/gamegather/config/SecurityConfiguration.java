@@ -12,9 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import java.util.List;
-import java.util.Map;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -39,12 +36,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        Map<String, List<String>> permitListMap = authenticationService.getPermitListMap();
-        List<String> adminPermitList = permitListMap.get("adminPermitList");
-        List<String> memberPermitList = permitListMap.get("memberPermitList");
-
-        adminPermitList.forEach(url -> System.out.println("admin permit list : " + url));
-        memberPermitList.forEach(url -> System.out.println("member permit list : " + url));
+//        Map<String, List<String>> permitListMap = authenticationService.getPermitListMap();
+//        List<String> adminPermitList = permitListMap.get("adminPermitList");
+//        List<String> memberPermitList = permitListMap.get("memberPermitList");
+//
+//        adminPermitList.forEach(url -> System.out.println("admin permit list : " + url));
+//        memberPermitList.forEach(url -> System.out.println("member permit list : " + url));
 
         http
                 .csrf((auth) -> auth.disable()
@@ -52,9 +49,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) -> auth
 //                        .requestMatchers("/member/login", "/member/signup").permitAll()
 //                        .anyRequest().authenticated()
-                                .anyRequest().permitAll()
-                ).headers(headers -> headers
-                 .frameOptions().sameOrigin());
+                        .anyRequest().permitAll()
+                );
         http
                 .formLogin(form -> form
                         .loginPage(("/member/login"))
@@ -62,7 +58,8 @@ public class SecurityConfiguration {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/match/matchchat", true)
                         .failureForwardUrl("/error/login")
-                );
+                ).headers(headers -> headers
+                        .frameOptions().sameOrigin());
         http
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))

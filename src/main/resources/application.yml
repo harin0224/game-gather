@@ -5,15 +5,17 @@ spring:
     username: scott
     password: tiger
 
-
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 server:
   port: 8100
-
 
 spring-boot:
   run:
     jvmArguments: -parameters
 
+
 file:
-  upload-dir: classpath:/profileIMG/
+  upload-dir: /src/main/resources/profileIMG

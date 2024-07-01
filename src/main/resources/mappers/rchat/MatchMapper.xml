@@ -17,7 +17,7 @@
 
     <insert id = "setMatch">
         INSERT
-        INTO TESTTEST
+        INTO TB_CATEGORY
             (
                USER_ID
              , GAMENAME

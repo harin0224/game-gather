@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.gamegather.club.model.dao.ClubMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+<!--    <resultMap type="com.multi.gamegather.club.dto.club" id="clubMapper">-->
+<!--        <id property="id" column="ID"/>-->
+<!--        <result property="code" column="CLUB_CODE"/>-->
+<!--        <result property="name" column="CLUB_NAME"/>-->
+<!--    </resultMap>-->
+
+    <!-- 클럽 데이터 생성 -->
+    <insert id="createClub" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO TB_CLUB(
+        CLUB_CODE,
+        CLUB_NAME)
+        VALUES (
+            #{clubCode},
+            #{name}
+        )
+    </insert>
+
+    <!-- 클럽 데이터 삭제 -->
+    <delete id="deleteClub">
+        DELETE FROM TB_club WHERE ID = #{clubId}
+    </delete>
+
+    <!-- 클럽 코드로 클럽 아이디 찾기 -->
+    <select id="getClubIdByCode" resultType="java.lang.Integer">
+        SELECT id FROM TB_CLUB WHERE club_code = #{clubCode}
+    </select>
+
+</mapper>
