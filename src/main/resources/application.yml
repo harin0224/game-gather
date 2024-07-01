@@ -16,6 +16,5 @@ spring-boot:
   run:
     jvmArguments: -parameters
 
-
 file:
-  upload-dir: /src/main/resources/profileIMG
+  upload-dir: profileIMG

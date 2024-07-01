@@ -198,8 +198,9 @@
                         <label class="text-black">---------->></label>
                         <input type="submit" value="설정완료" class="btn-submit" onclick="alert('★랜덤매칭버튼을 한번더 눌러주세요!★')">
 <!--                        <a href="/rchat/rchat"><button>여기를 클릭하세요</button></a>-->
-<!--                        <button id="rchatstart" class="btn-submit" >매칭시작</button>-->
+
 <!--                        <button type="submit" class="btn-submit" id="rchatstart">매칭시작</button>-->
+
                         <label class="text-black"><<----------</label>
 
 
@@ -221,7 +222,16 @@
         </div>
         <script src="/js/match/matchchat.js"></script>
     </form>
+    <button id="rchatstart-1" class="btn-submit" >매칭시작</button>
 </div>
+<script>
+
+    $('#rchatstart-1').click(function() {
+window.location.href = '/rchat/rchat';
+});
+</script>
+
+
 
 </body>
 </html>

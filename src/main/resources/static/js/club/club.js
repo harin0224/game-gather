@@ -14,7 +14,6 @@ function setConnected(connected) {
 }
 
 // 소켓 연결해서 기능 불러오기
-// 구독
 function connect() {
     var socket = new SockJS('/club-websocket');
     var clubCode = $("#clubCode").val();
