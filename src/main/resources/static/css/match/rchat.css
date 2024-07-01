@@ -1,0 +1,11 @@
+.d-flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.mr-2 {
+    margin-right: 0.5rem; /* 8px */
+}

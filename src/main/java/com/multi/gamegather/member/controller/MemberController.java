@@ -1,11 +1,17 @@
 package com.multi.gamegather.member.controller;
 
+
+import com.multi.gamegather.authentication.model.dto.CustomUser;
+
 import com.multi.gamegather.member.model.dto.MemberDTO;
 import com.multi.gamegather.member.model.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -104,7 +110,9 @@ public class MemberController {
     }
 
     @PostMapping("/findUserIdPwd")
+
     public ResponseEntity<?> findUserIdPwd(@RequestBody MemberDTO memberDTO) {
+
         MemberDTO member = memberService.findUser(memberDTO);
         if (member != null) {
             return ResponseEntity.ok(member);

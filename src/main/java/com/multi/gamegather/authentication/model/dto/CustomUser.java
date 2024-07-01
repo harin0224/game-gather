@@ -1,10 +1,12 @@
 package com.multi.gamegather.authentication.model.dto;
 
+
 import com.multi.gamegather.member.model.dto.MemberDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.sql.Timestamp;
 import java.util.Collection;
+
 
 public class CustomUser extends User {
     private int no;
@@ -23,9 +25,11 @@ public class CustomUser extends User {
     private String deleteAccount;
     private String role;
 
+
     public CustomUser(MemberDTO member, Collection<? extends GrantedAuthority> authorities) {
         super(member.getId(), member.getPwd(), authorities);
         setDetails(member);
+
     }
 
     private void setDetails(MemberDTO member){
@@ -44,6 +48,7 @@ public class CustomUser extends User {
         this.deleteDate = member.getDeleteDate();
         this.deleteAccount = member.getDeleteAccount();
         this.role = member.getRole();
+
     }
 
     public int getNo() {

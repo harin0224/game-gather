@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <link rel="stylesheet" href="css/styles.css">-->
+    <link rel="stylesheet" href="/css/match/match.css">
+
+</head>
+<body>
+
+<div class="section over-hide z-bigger">
+    <form action="/match/match" method="post">
+        <div class="background-color"></div>
+        <div class="section over-hide z-bigger">
+            <div class="container pb-5">
+                <div class="row justify-content-center pb-5">
+
+                    <div class="col-12 pt-5">
+                        <p class="text-black">게임종류를 선택해주세요</p>
+                    </div>
+                    <div class="col-12 pb-5">
+
+                        <input class="checkbox-tools" type="radio" name="gamename" id="league_of_legends"
+                               value="league_of_legends" checked>
+                        <label class="for-checkbox-tools" for="league_of_legends">
+                            <i class='uil uil-line-alt'></i>
+                            리그오브레전드
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="overwatch" value="overwatch">
+                        <label class="for-checkbox-tools" for="overwatch">
+                            <i class='uil uil-vector-square'></i>
+                            오버워치
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="battleground-3"
+                                  value="battleground">
+                        <label class="for-checkbox-tools" for="battleground-3">
+                            <i class='uil uil-ruler'></i>
+                            배틀그라운드
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="vallolant" value="vallolant">
+                        <label class="for-checkbox-tools" for="vallolant">
+                            <i class='uil uil-crop-alt'></i>
+                            발로란트
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="lostark" value="lostark">
+                        <label class="for-checkbox-tools" for="lostark">
+                            <i class='uil uil-brush-alt'></i>
+                            로스트아크
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="maplestory"
+                                  value="maplestory">
+                        <label class="for-checkbox-tools" for="maplestory">
+                            <i class='uil uil-image-resize-landscape'></i>
+                            메이플스토리
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="gamename" id="goosegooseduck"
+                                  value="goosegooseduck">
+                        <label class="for-checkbox-tools" for="goosegooseduck">
+                            <i class='uil uil-image-resize-landscape'></i>
+                            구스구스덕
+                        </label>
+
+
+                    </div>
+                    <div class="col-12 pt-1">
+                        <p class="text-black">채팅할 총 인원을 선택해주세요</p>
+                    </div>
+                    <div class="col-xl-10 pb-5">
+                        <input class="checkbox-option" type="radio" name="headcnt" id="cnt2" value="2" checked>
+                        <label class="for-checkbox-budget" for="cnt2">
+                            <span data-hover="2명">2명</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="headcnt" id="cnt3" value="3">
+                        <label class="for-checkbox-budget" for="cnt3">
+                            <span data-hover="3명">3명</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="headcnt" id="cnt4" value="4">
+                        <label class="for-checkbox-budget" for="cnt4">
+                            <span data-hover="4명">4명</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="headcnt" id="cnt5" value="5">
+                        <label class="for-checkbox-budget" for="cnt5">
+                            <span data-hover="5명">5명</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="headcnt" id="cnt6" value="6">
+                        <label class="for-checkbox-budget" for="cnt6">
+                            <span data-hover="6명">6명</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="headcnt" id="cnt7" value="7">
+                        <label class="for-checkbox-budget" for="cnt7">
+                            <span data-hover="7명">7명</span>
+                        </label>
+                    </div>
+                    <div class="col-12 pt-1">
+                        <p class="text-black">같이할 인원의 성향을 선택해주세요</p>
+                    </div>
+                    <div><p class="text-black"> 성향 1 </p></div>
+                    <div class="tenendcy1">
+                        <input class="checkbox-option" type="radio" name="tag1" id="funnygame" value="funnygame"
+                               checked>
+                        <label class="for-checkbox-option" for="funnygame">
+                            <i class='uil uil-coffee mr-3'></i><span data-hover="즐겜">즐겜</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag1" id="hardgame" value="hardgame">
+                        <label class="for-checkbox-option" for="hardgame">
+                            <i class='uil uil-restaurant mr-3'></i><span data-hover="빡겜">빡겜</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag1" id="friedly" value="friedly">
+                        <label class="for-checkbox-option" for="friedly">
+                            <i class='uil uil-car-sideview mr-3'></i><span data-hover="친목">친목</span>
+                        </label>
+                    </div>
+                    <div><p class="text-black"> 성향 2 </p></div>
+                    <div class="tenendcy2">
+                        <!--
+                                --><input class="checkbox-option" type="radio" name="tag2" id="higher" value="higher" checked>
+                        <label class="for-checkbox-option" for="higher">
+                            <i class='uil uil-flower mr-3'></i><span data-hover="고수">고수</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag2" id="middler" value="middler">
+                        <label class="for-checkbox-option" for="middler">
+                            <i class='uil uil-wifi mr-3'></i><span data-hover="중수">중수</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag2" id="lower" value="lower">
+                        <label class="for-checkbox-option" for="lower">
+                            <i class='uil uil-parking-square mr-3'></i><span data-hover="초보">초보</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div><p class="text-black"> 성향 3 </p></div>
+                    </div>
+                    <div class="tenendcy3">
+                        <!--
+                        --><input class="checkbox-option" type="radio" name="tag3" id="rankgame" value="rankgame"
+                          checked>
+                        <label class="for-checkbox-option" for="rankgame">
+                            <i class='uil uil-tv-retro mr-3'></i><span data-hover="랭크게임">랭크게임</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag3" id="normalgame" value="normalgame">
+                        <label class="for-checkbox-option" for="normalgame">
+                            <i class='uil uil-books mr-3'></i><span data-hover="일반게임">일반게임</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag3" id="specialgame" value="specialgame">
+                        <label class="for-checkbox-option" for="specialgame">
+                            <i class='uil uil-kayak mr-3'></i><span data-hover="특별모드">특별모드</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag3" id="partplay" value="partyplay">
+                        <label class="for-checkbox-option" for="partplay">
+                            <i class='uil uil-glass-martini-alt mr-3'></i><span data-hover="파티사냥">파티사냥</span>
+                        </label><!--
+						--><input class="checkbox-option" type="radio" name="tag3" id="bossrade" value="bossrade">
+                        <label class="for-checkbox-option" for="bossrade">
+                            <i class='uil uil-dumbbell mr-3'></i><span data-hover="보스레이드">보스레이드</span>
+                        </label>
+                    </div>
+                    <div class="col-12 pt-5">
+                        <p class="text-black">같이할 인원의 연령대를 선택해주세요</p>
+                    </div>
+                    <div class="col-12 pb-5">
+                        <input class="checkbox-tools" type="radio" name="age" id="10late" value="10late" checked>
+                        <label class="for-checkbox-tools" for="10late">
+                            <i class='uil uil-line-alt'></i>
+                            10대 후반
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="20earlymid" value="20earlymid">
+                        <label class="for-checkbox-tools" for="20earlymid">
+                            <i class='uil uil-vector-square'></i>
+                            20대 초중반
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="20midlate" value="20midlate">
+                        <label class="for-checkbox-tools" for="20midlate">
+                            <i class='uil uil-ruler'></i>
+                            20대 중후반
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="30earlymid" value="30earlymid">
+                        <label class="for-checkbox-tools" for="30earlymid">
+                            <i class='uil uil-crop-alt'></i>
+                            30대 초중반
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="30midlate" value="30midlate">
+                        <label class="for-checkbox-tools" for="30midlate">
+                            <i class='uil uil-brush-alt'></i>
+                            30대 중후반
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="40more" value="40more">
+                        <label class="for-checkbox-tools" for="40more">
+                            <i class='uil uil-image-resize-landscape'></i>
+                            40대 이상
+                        </label><!--
+						--><input class="checkbox-tools" type="radio" name="age" id="50more" value="50more">
+                        <label class="for-checkbox-tools" for="50more">
+                            <i class='uil uil-image-resize-landscape'></i>
+                            50대 이상
+                        </label>
+                        <br>
+                        <br>
+                        <label class="text-black">---------->></label>
+                        <input type="submit" value="설정완료" class="btn-submit" onclick="alert('★랜덤매칭버튼을 한번더 눌러주세요!★')">
+<!--                        <a href="/rchat/rchat"><button>여기를 클릭하세요</button></a>-->
+<!--                        <button id="rchatstart" class="btn-submit" >매칭시작</button>-->
+<!--                        <button type="submit" class="btn-submit" id="rchatstart">매칭시작</button>-->
+                        <label class="text-black"><<----------</label>
+
+
+<!--                        <script>-->
+<!--                            const rchatstart = document.getElementById('rchatstart');-->
+
+<!--                            rchatstart.addEventListener('click', () => {-->
+<!--                              // 부모 iframe의 src 속성 변경-->
+<!--                              window.parent.document.getElementById('iframecontent').src = '/templates/rchat/rchat.html';-->
+<!--                            });-->
+<!--                        </script>-->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <script src="/js/match/matchchat.js"></script>
+    </form>
+</div>
+
+</body>
+</html>
