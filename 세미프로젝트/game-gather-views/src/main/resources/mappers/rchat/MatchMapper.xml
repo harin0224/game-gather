@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.multi.gamegather.match.model.dao.MatchMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+
+    <resultMap type="com.multi.gamegather.match.model.dto.MatchDTO" id="matchResultMap">
+        <result property="userid" column="USER_ID"/>
+        <result property="gamename" column="GAMENAME"/>
+        <result property="headcnt" column="HEADCNT"/>
+        <result property="tag1" column="TAG1"/>
+        <result property="tag2" column="TAG2"/>
+        <result property="tag3" column="TAG3"/>
+        <result property="age" column="AGE"/>
+    </resultMap>
+
+    <insert id = "setMatch">
+        INSERT
+        INTO TB_CATEGORY
+            (
+               USER_ID
+             , GAMENAME
+             , HEADCNT
+             , TAG1
+             , TAG2
+             , TAG3
+             , AGE
+        )
+        VALUES
+            (
+              #{ userid }
+            , #{ gamename }
+            , #{ headcnt }
+            , #{ tag1 }
+            , #{ tag2 }
+            , #{ tag3 }
+            , #{ age }
+            )
+
+
+    </insert>
+
+</mapper>

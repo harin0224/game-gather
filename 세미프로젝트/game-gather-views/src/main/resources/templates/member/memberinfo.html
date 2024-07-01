@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <title>회원 정보 수정</title>
+</head>
+<body>
+<br>
+<h1 align="center">회원 정보 수정</h1>
+<br><br><br>
+<div align="center">
+    <form action="/member/update" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td>
+                    <label for="profile_img_path">프로필 이미지:</label>
+                    <input type="file" id="profile_img_path" name="profile_img_path">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="id">아이디:</label>
+                    <input type="text" id="id" name="id" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">비밀번호:</label>
+                    <input type="password" id="password" name="password">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="nickname">닉네임:</label>
+                    <input type="text" id="nickname" name="nickname" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="age">나이:</label>
+                    <input type="number" id="age" name="age" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="gender">성별:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="M">남성</option>
+                        <option value="F">여성</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="tel">연락처:</label>
+                    <input type="text" id="tel" name="tel" required>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <input type="submit" value="Update">
+        </div>
+    </form>
+    <a href="/member/mypage">뒤로 가기</a>
+</div>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/member/info',
+            method: 'GET',
+            success: function(data) {
+                $('#id').val(data.id);
+                $('#name').val(data.name);
+                $('#nickname').val(data.nickname);
+                $('#age').val(data.age);
+                $('#gender').val(data.gender);
+                $('#tel').val(data.tel);
+            }
+        });
+    });
+</script>
+</body>
+</html>
