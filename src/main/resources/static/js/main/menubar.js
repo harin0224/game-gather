@@ -16,3 +16,9 @@ document.getElementById('mypage').addEventListener('click', () => {
     document.getElementById('iframecontent').src = '/member/mypage';
 });
 
+
+//마이페이지
+document.getElementById('club').addEventListener('click', () => {
+    document.getElementById('iframecontent').src = '/club';
+});
+

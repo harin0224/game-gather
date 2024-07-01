@@ -5,6 +5,8 @@ import com.multi.gamegather.club.model.dao.ClubChatMapper;
 import com.multi.gamegather.club.model.dto.*;
 import com.multi.gamegather.club.service.ClubService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,8 +52,17 @@ public class ClubController {
     @SendTo("/sub/club/receive-message/{clubId}")
     public MessageDTO messageManager(
             @DestinationVariable int clubId,
-            MessageDTO message
+            MessageDTO message,
+            Principal principal,
+            CustomUser currentUser
     ) throws Exception {
+        String username = principal.getName();
+        System.out.println("username " + username);
+        System.out.println("currentUser: " + ToStringBuilder.reflectionToString(currentUser, ToStringStyle.JSON_STYLE));
+        // 예시
+//        int userId = memberDAO.getUserByUserName(username);
+//        message.setSenderId(userId);
+
         clubService.saveChat(clubId, message.getSenderId(), message.getMessage());
         System.out.println("Get From " + clubId + " send to " + message.getMessage());
         return message;

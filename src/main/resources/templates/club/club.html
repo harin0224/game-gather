@@ -9,43 +9,204 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/club/club.css">
 
     <script src="/js/club/club.js"></script>
+    <style>
+
+        #club-bar{
+            position:position;
+            width:30%;
+        }
+
+        #main-view{
+            position:position;
+            width:70%;
+        }
+    </style>
 
 </head>
 <body>
+<div id="club-bar" class="border float-left">
+    <ul>
 
-<div id="clubList">
+    </ul>
+
+    <button id="create-club-btn" onclick="createClub()">Add Club</button>
 </div>
 
-<button id="getClubBtn" onclick="getClubList()">클럽 목록 가져오기</button>
+<!-- 메인 화면의 상단 바 클럽 이름을 보여줌 -->
+<div id="main-view" class="border float-left">
+    <div id="main-title" class="border">
+        <img src="" />
+        <span>로아</span>
+        <button id="show-users" class="float-right" onclick="showUser()">
+            15명
+        </button>
+    </div>
 
-<input id="currentClubId" type="number" placeholder="보내고싶은 클럽 id 입력">
-<input type="text" id="message"  placeholder="메세지 입력"/>
-<button id="sendMessageBtn" onclick="sendMessage()">메세지 보내기</button>
+    <!-- 메세지를 보여주는 메인 div -->
+    <div id="main-chat" class="border">
+        <!-- 메세지를 보여주는 div -->
+<!--        <div class="main-chat-message-div">메세지1</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+    </div>
 
+    <div id="bottom-chat" class="border">
+        <input class="float-left widht-60" type="text" id="chat-input" />
+        <button class="float-right" onclick="sendMessage()">보내기</button>
+    </div>
+</div>
 
-<input id="deleteClubId" type="number" placeholder="지우고 싶은 클럽 id 입력">
-<button id="deleteClubBtn" onclick="deleteClub()">클럽 지우기</button>
+<!-- 우클릭시 띄어주는 메뉴 -->
+<div id="custom-menu" class="custom-menu">
+    <ul>
+        <li>Edit</li>
+        <li>Delete</li>
+        <li>Info</li>
+    </ul>
+</div>
 
+<!-- 클럽 추가 팝업 -->
+<div id="add-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 추가</h2>
+        <button onclick="showJoinClub()">클럽 가입하기</button>
+        <button onclick="showCreateClub()">클럽 생성하기</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
 
-<button id="addClub" onclick="addClub()">클럽 추가</button>
+<!-- 클럽 가입 팝업 -->
+<div id="join-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 가입하기</h2>
+        <input type="text" id="club-code" placeholder="클럽 코드 입력" />
+        <button onclick="enterClub()">가입</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
 
-<input id="enterClub" placeholder="입장할 방 코드">
-<button id="enterClubBtn" onclick="enterClub()">입장</button>
+<!-- 클럽 생성 팝업 -->
+<div id="create-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 생성하기</h2>
+        <input type="text" id="club-name" placeholder="서버 이름" />
+        <div class="description-container">
+<!--            <textarea id="club-description" placeholder="설명" readonly></textarea>-->
+        <select id="category-list">
 
-<input id="exitClub" type="number" placeholder="나가고 싶은 클럽 id 입력">
-<button id="exitClubBtn" onclick="exitClub()">클럽 나가기</button>
+        </select>
+        </div>
+        <button onclick="createNewClub()">생성</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
 
-<input id="loadClubChat" type="number" placeholder="대화 내역 가져올 클럽 id 입력">
-<button id="loadClubChatBtn" onclick="loadClubChat()">대화 내역 가져오기</button>
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const clubBar = document.getElementById("club-bar");
+      const customMenu = document.getElementById("custom-menu");
 
+      clubBar.addEventListener("contextmenu", function (e) {
+        if (e.target.tagName === "LI") {
+          e.preventDefault();
 
+          const rect = e.target.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
 
+          customMenu.style.display = "block";
+          customMenu.style.left = `${e.clientX}px`;
+          customMenu.style.top = `${e.clientY}px`;
 
-<input id="kickClubId" type="number" placeholder="추방할 클럽 id 입력">
-<input id="kickUserId" type="number" placeholder="추방할 사람 id 입력">
-<button id="kickBtn" onclick="kickUser()">추방</button>
+          // 선택된 li의 텍스트 저장
+          customMenu.dataset.selectedClub = e.target.textContent;
+        }
+      });
 
+      document.addEventListener("click", function () {
+        customMenu.style.display = "none";
+      });
+
+      customMenu.addEventListener("click", function (e) {
+        if (e.target.tagName === "LI") {
+          const selectedClub = customMenu.dataset.selectedClub;
+          const action = e.target.textContent;
+          console.log(`Action: ${action}, Club: ${selectedClub}`);
+          customMenu.style.display = "none";
+        }
+      });
+    });
+
+    function createClub() {
+      document.getElementById("add-club-popup").style.display = "block";
+    }
+
+    function showJoinClub() {
+      closePopup();
+      document.getElementById("join-club-popup").style.display = "block";
+    }
+
+    function showCreateClub() {
+      closePopup();
+      document.getElementById("create-club-popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("add-club-popup").style.display = "none";
+      document.getElementById("join-club-popup").style.display = "none";
+      document.getElementById("create-club-popup").style.display = "none";
+    }
+
+    function joinClub() {
+      const clubCode = document.getElementById("club-code").value;
+      console.log("Joining club with code:", clubCode);
+      // 여기에 클럽 가입 로직 구현
+      closePopup();
+    }
+
+    function createNewClub() {
+      const clubName = document.getElementById("club-name").value;
+      const clubDescription =
+        document.getElementById("club-description").value;
+      console.log("Creating new club:", clubName, clubDescription);
+      // 여기에 클럽 생성 로직 구현
+      closePopup();
+    }
+
+// 페이지 로드 시 카테고리 목록 가져오기
+document.addEventListener('DOMContentLoaded', fetchCategories);
+
+let categories = [];
+
+function fetchCategories() {
+    axios
+    .get('/club/category')
+    .then(response => {
+        categories = response.data;
+        populateCategoryList();
+    })
+}
+
+function populateCategoryList() {
+    const categoryList = document.getElementById('category-list');
+    categoryList.innerHTML = '';
+    categories.forEach(category => {
+        const item = document.createElement('option');
+        item.value = category.id;
+        item.textContent = category.name;
+        categoryList.appendChild(item);
+    });
+}
+
+function selectCategory(category) {
+    document.getElementById('club-description').value = category;
+    document.getElementById('category-list').style.display = 'none';
+}
+
+</script>
 </body>
 </html>

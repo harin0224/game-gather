@@ -22,14 +22,14 @@ public class ClubControllerForView {
 
     private final ClubService clubService;
 
-    @GetMapping("/club")            // 오류 있음
+    @GetMapping        // 오류 있음
     public String test(){
         return "club/club";
     }
 
-    @PostMapping("/club")
-    public String club2(){
-        return "redirect:/club";
-    }
+//    @PostMapping("/club")
+//    public String club2(){
+//        return "redirect:/club";
+//    }
 
 }
