@@ -103,4 +103,31 @@
         DELETE FROM TB_USERS
         WHERE USER_ID = #{memberId}
     </delete>
+
+    <!-- 혜선 -->
+    <select id="findMemberByNos" resultMap="memberResultMap">
+        SELECT
+        USER_NO,
+        USER_ID,
+        USER_PASSWORD,
+        USER_NAME,
+        USER_PROFILE_IMG_PATH,
+        USER_NICKNAME,
+        USER_AGE,
+        USER_GENDER,
+        USER_TEL,
+        USER_MANNER_COUNT,
+        USER_BAN_COUNT,
+        USER_SIGNUP_DATE,
+        USER_DELETE_ACCOUNT_DATE,
+        USER_DELETE_ACCOUNT,
+        USER_ROLE
+        FROM TB_USERS
+        WHERE USER_NO IN
+        <foreach item="no" index="index" collection="memberNos" open="(" separator="," close=")">
+            #{no}
+        </foreach>
+        <!--
+        (#{memberNos})-->
+    </select>
 </mapper>

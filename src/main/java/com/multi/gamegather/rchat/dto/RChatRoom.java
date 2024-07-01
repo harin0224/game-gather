@@ -1,4 +1,4 @@
-package com.multi.gamegather.club.dto;
+package com.multi.gamegather.rchat.dto;
 
 import com.multi.gamegather.chat.service.ChatService;
 import lombok.Builder;
@@ -9,24 +9,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-public class ClubRoom {
+public class RChatRoom {
 
     private String roomId;
     private String name;
     private Set<WebSocketSession> sessions = new HashSet<>();
 
     @Builder
-    public ClubRoom(String  roomId, String name){
+    public RChatRoom(String  roomId, String name){
         this.roomId = roomId;
         this.name = name;
     }
 
-    public void handleActions(WebSocketSession session, ClubMessage clubMessage, ChatService chatService){
-        if(clubMessage.getType().equals(ClubMessage.MessageType.ENTER)){
+    public void handleActions(WebSocketSession session, RChatMessage rchatMessage, ChatService chatService){
+        if(rchatMessage.getType().equals(RChatMessage.MessageType.ENTER)){
             sessions.add(session);
-            clubMessage.setMessage((clubMessage.getSender() + "님이 입장했습니다."));
+            rchatMessage.setMessage((rchatMessage.getSender() + "님이 입장했습니다."));
         }
-        sendMessage(clubMessage, chatService);
+        sendMessage(rchatMessage, chatService);
     }
 
     public <T> void sendMessage(T message, ChatService chatService){

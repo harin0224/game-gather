@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//
+
 //        Map<String, List<String>> permitListMap = authenticationService.getPermitListMap();
 //        List<String> adminPermitList = permitListMap.get("adminPermitList");
 //        List<String> memberPermitList = permitListMap.get("memberPermitList");
@@ -56,9 +56,10 @@ public class SecurityConfiguration {
                         .loginPage(("/member/login"))
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/main/main", true)
+                        .defaultSuccessUrl("/match/matchchat", true)
                         .failureForwardUrl("/error/login")
-                );
+                ).headers(headers -> headers
+                        .frameOptions().sameOrigin());
         http
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))

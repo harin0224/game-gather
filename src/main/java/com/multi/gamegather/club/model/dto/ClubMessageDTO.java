@@ -1,11 +1,11 @@
-package com.multi.gamegather.club.dto;
+package com.multi.gamegather.club.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ClubMessage {
+public class ClubMessageDTO {
 
     public enum MessageType{
         ENTER, TALK
