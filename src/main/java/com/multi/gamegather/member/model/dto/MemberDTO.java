@@ -3,7 +3,6 @@ package com.multi.gamegather.member.model.dto;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 public class MemberDTO {
 
     private int no;

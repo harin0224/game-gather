@@ -10,11 +10,11 @@
     </resultMap>
 
     <insert id="insertLog">
-        INSERT INTO LOGTEST (CHAT_TYPE, USER_ID, CHAT_CONTENT)
+        INSERT INTO TB_RCHAT_LOG (CHAT_TYPE, USER_ID, CHAT_CONTENT)
         VALUES ('RCHAT', #{userid}, #{rchatcontent})
     </insert>
 
     <select id="selectLog">
-        SELECT * FROM LOGTEST WHERE = #{userid}
+        SELECT * FROM TB_RCHAT_LOG WHERE = #{userid}
     </select>
 </mapper>

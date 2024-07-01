@@ -21,7 +21,6 @@ public class RChatRoom {
         this.name = name;
     }
 
-    // 로직인가?
     public void handleActions(WebSocketSession session, RChatMessage rchatMessage, ChatService chatService){
         if(rchatMessage.getType().equals(RChatMessage.MessageType.ENTER)){
             sessions.add(session);

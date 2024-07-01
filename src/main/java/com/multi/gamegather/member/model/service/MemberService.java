@@ -19,18 +19,27 @@ public class MemberService {
         return memberDAO.findUserByDetails(memberDTO.getName(), memberDTO.getTel(), memberDTO.getGender());
     }
 
+    public MemberDTO findMemberById(String id) {
+        return memberDAO.findMemberById(id);
+    }
 
-    public void saveMember(MemberDTO memberDTO) {
+    public void insertMember(MemberDTO memberDTO) {
+        // 비밀번호 암호화
+        memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
         memberDAO.insertMember(memberDTO);
     }
 
-    public boolean updateMember(MemberDTO memberDTO) {
-        try {
-            MemberDAO.updateMember(memberDTO);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+    public void updateMember(MemberDTO memberDTO) {
+        if (memberDTO.getPwd() != null && !memberDTO.getPwd().isEmpty()) {
+            memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+        } else {
+            MemberDTO existingMember = memberDAO.findMemberById(memberDTO.getId());
+            memberDTO.setPwd(existingMember.getPwd());
         }
+        memberDAO.updateMember(memberDTO);
+    }
+
+    public void deleteMember(String id) {
+        memberDAO.deleteMember(id);
     }
 }

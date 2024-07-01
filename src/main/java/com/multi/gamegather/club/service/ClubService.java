@@ -54,7 +54,6 @@ public class ClubService {
 //        return clubRooms.get(roomId);
 //    }
 
-
     // 채팅방 생성
     @Transactional      // 하나라도 틀리면 되돌아감(트랜잭션 걸기)
     public int createClub(CreateClubRequestDTO data){
