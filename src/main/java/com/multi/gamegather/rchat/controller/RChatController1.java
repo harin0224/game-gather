@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RChatController1 {
 
 
-    @GetMapping("/rchat")            // 오류 있음
+    @GetMapping("/rchat")
     public String rchatpage(){
         return "rchat/rchat";
+
+    }
+
+    @GetMapping("/score")
+    public String scorepage(){
+        return "rchat/score";
 
     }
 

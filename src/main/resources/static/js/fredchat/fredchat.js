@@ -52,8 +52,6 @@ function disconnect() {
     }
     setConnected(false);
     console.log("Disconnected");
-
-    window.location.href = '/rchat/score';
 }
 
 function sendChatting() {

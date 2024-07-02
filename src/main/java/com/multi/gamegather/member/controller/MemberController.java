@@ -5,13 +5,17 @@ import com.multi.gamegather.member.model.dto.MemberDTO;
 import com.multi.gamegather.member.model.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,14 +44,14 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("profile_img_path") MultipartFile file,
-                                                   @RequestParam("id") String id,
-                                                   @RequestParam("password") String password,
-                                                   @RequestParam("name") String name,
-                                                   @RequestParam("nickname") String nickname,
-                                                   @RequestParam("age") int age,
-                                                   @RequestParam("gender") String gender,
-                                                   @RequestParam("tel") String tel) {
+    public ModelAndView handleFileUpload(@RequestParam("profile_img_path") MultipartFile file,
+                                         @RequestParam("id") String id,
+                                         @RequestParam("password") String password,
+                                         @RequestParam("name") String name,
+                                         @RequestParam("nickname") String nickname,
+                                         @RequestParam("age") int age,
+                                         @RequestParam("gender") String gender,
+                                         @RequestParam("tel") String tel) {
 
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(id);
@@ -60,13 +64,12 @@ public class MemberController {
 
         // 파일이 비어있는지 확인
         if (file.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("파일을 선택해 주세요");
+            return new ModelAndView("redirect:/member/signup?error=파일을 선택해 주세요");
         }
 
         try {
             // 절대 경로 설정
-            Path currentPath = Paths.get(System.getProperty("user.dir")).toAbsolutePath();
-            Path uploadPath = currentPath.resolve("src/main/resources/static").resolve(uploadDir);
+            Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
@@ -88,9 +91,9 @@ public class MemberController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 실패");
+            return new ModelAndView("redirect:/member/signup?error=파일 업로드 실패");
         }
-        return ResponseEntity.ok("회원 가입 완료");
+        return new ModelAndView("redirect:/member/login");
     }
 
     @GetMapping("/mypage")
@@ -114,14 +117,14 @@ public class MemberController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<String> updateMember(@RequestParam("profile_img_path") MultipartFile file,
-                                               @RequestParam("id") String id,
-                                               @RequestParam("password") String password,
-                                               @RequestParam("name") String name,
-                                               @RequestParam("nickname") String nickname,
-                                               @RequestParam("age") int age,
-                                               @RequestParam("gender") String gender,
-                                               @RequestParam("tel") String tel) {
+    public ModelAndView updateMember(@RequestParam("profile_img_path") MultipartFile file,
+                                     @RequestParam("id") String id,
+                                     @RequestParam("password") String password,
+                                     @RequestParam("name") String name,
+                                     @RequestParam("nickname") String nickname,
+                                     @RequestParam("age") int age,
+                                     @RequestParam("gender") String gender,
+                                     @RequestParam("tel") String tel) {
 
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(id);
@@ -140,7 +143,7 @@ public class MemberController {
                 if (!Files.exists(uploadPath)) {
                     Files.createDirectories(uploadPath);
                 }
-                String uniqueFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+                String uniqueFileName = UUID.randomUUID().toString().substring(0, 8) + "_" + file.getOriginalFilename();
                 Path filePath = uploadPath.resolve(uniqueFileName);
                 Files.copy(file.getInputStream(), filePath);
 
@@ -149,13 +152,12 @@ public class MemberController {
 
             } catch (IOException e) {
                 e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("파일 업로드 실패");
+                return new ModelAndView("redirect:/member/mypage?error=파일 업로드 실패");
             }
         }
-
         memberService.updateMember(memberDTO);
 
-        return ResponseEntity.ok("회원 정보 수정 완료");
+        return new ModelAndView("redirect:/member/mypage");
     }
 
     @PostMapping("/delete")
@@ -171,13 +173,41 @@ public class MemberController {
         return "member/findUserIdPwd";
     }
 
-    @PostMapping("/findUserIdPwd")
-    public ResponseEntity<?> findUserIdPwd(@RequestBody MemberDTO memberDTO) {
-        MemberDTO member = memberService.findUser(memberDTO);
-        if (member != null) {
-            return ResponseEntity.ok(member);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    @GetMapping("/getCurrentUser")
+    @ResponseBody
+    public ResponseEntity<MemberDTO> getCurrentUser(@AuthenticationPrincipal CustomUser customUser) {
+        MemberDTO member = memberService.findMemberById(customUser.getId());
+        return ResponseEntity.ok(member);
+    }
+
+    @GetMapping("/profile-img/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+        try {
+            Path file = Paths.get(uploadDir).resolve(filename);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                throw new RuntimeException("파일을 읽을 수 없습니다: " + filename);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("파일을 읽을 수 없습니다: " + filename, e);
         }
+    }
+
+
+    @PostMapping("/incrementMannerCount")
+    public ModelAndView incrementMannerCount(@RequestParam("userId") String userId) {
+        memberService.incrementMannerCount(userId);
+        return new ModelAndView("redirect:/success/manner");
+    }
+
+    @PostMapping("/incrementBanCount")
+    public ModelAndView incrementBanCount(@RequestParam("userId") String userId) {
+        memberService.incrementBanCount(userId);
+        return new ModelAndView("redirect:/success/ban");
     }
 }

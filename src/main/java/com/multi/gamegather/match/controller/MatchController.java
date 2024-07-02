@@ -1,13 +1,17 @@
 package com.multi.gamegather.match.controller;
 
+import com.multi.gamegather.authentication.model.dto.CustomUser;
 import com.multi.gamegather.match.model.dto.MatchDTO;
 import com.multi.gamegather.match.service.MatchService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.context.MessageSource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -31,8 +35,14 @@ public class MatchController {
 
     }
     @GetMapping("/match")
-    public void matchpage(){
+    public String matchpage(@AuthenticationPrincipal CustomUser customUser){
 
+        if (customUser.getBanCount() > 10) {
+            return "/error/match";
+        }
+        else {
+            return "/match/match";
+        }
     }
 
     @PostMapping("match")
@@ -51,25 +61,63 @@ public class MatchController {
 
 
         // 등록 성공 시 메뉴 목록 페이지로 리다이렉트합니다.
-        mv.setViewName("redirect:/match/matchchat");
+        mv.setViewName("redirect:/rchat/rchat");
 
         return mv;
     }
+//    league_of_legends
+//    overwatch
+//    battleground
+//    vallolant
+//    lostark
+//    maplestory
+//    goosegooseduck
+    @GetMapping("/countLeagueOfLegends")
+    @ResponseBody
+    public ResponseEntity<Integer> countLeagueOfLegends(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "league_of_legends");
+        return ResponseEntity.ok(count);
+    }
 
+    @GetMapping("/countOverwatch")
+    @ResponseBody
+    public ResponseEntity<Integer> countOverwatch(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "overwatch");
+        return ResponseEntity.ok(count);
+    }
 
-//
-//    @PostMapping("match")
-//    public ModelAndView setMatch(ModelAndView mv, MatchDTO setting, RedirectAttributes rttr, Locale locale) throws Exception {
-//        // 메뉴를 등록합니다.
-//        matchService.setMatch(setting);
-//
-//        // 등록 성공 시 메뉴 목록 페이지로 리다이렉트합니다.
-//        mv.setViewName("redirect:/match/matchchat");
-//        // 등록 성공 메시지를 Flash 속성에 담아서 전달합니다.
-//        rttr.addFlashAttribute("successMessage", messageSource.getMessage("setMatch", null, locale));
-//
-//        return mv;
-//    }
+    @GetMapping("/countBattleground")
+    @ResponseBody
+    public ResponseEntity<Integer> countBattleground(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "battleground");
+        return ResponseEntity.ok(count);
+    }
 
+    @GetMapping("/countVallolant")
+    @ResponseBody
+    public ResponseEntity<Integer> countVallolant(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "vallolant");
+        return ResponseEntity.ok(count);
+    }
 
+    @GetMapping("/countLostark")
+    @ResponseBody
+    public ResponseEntity<Integer> countLostark(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "lostark");
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/countMaplestory")
+    @ResponseBody
+    public ResponseEntity<Integer> countMaplestory(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "maplestory");
+        return ResponseEntity.ok(count);
+    }
+
+    @GetMapping("/countGoosegooseduck")
+    @ResponseBody
+    public ResponseEntity<Integer> countGoosegooseduck(@AuthenticationPrincipal CustomUser customUser) {
+        int count = matchService.countByGameName(customUser.getId(), "goosegooseduck");
+        return ResponseEntity.ok(count);
+    }
 }
