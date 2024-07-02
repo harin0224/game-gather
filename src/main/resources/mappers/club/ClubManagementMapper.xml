@@ -32,13 +32,13 @@
         SELECT c.id, c.club_name AS name, c.club_code AS code, cm.club_status AS status
         FROM tb_club_management cm
         JOIN tb_club c ON cm.club_id = c.id
-        WHERE cm.user_id = #{userId}
+        WHERE cm.user_id = #{userId} and cm.club_status != "KICK"
     </select>
 
     <select id="findUserByClub" resultType="int">
         SELECT cm.user_id as userId
         FROM tb_club_management cm
-        WHERE cm.club_id = #{club_id}
+        WHERE cm.club_id = #{club_id} and cm.club_status != "KICK"
     </select>
 
 

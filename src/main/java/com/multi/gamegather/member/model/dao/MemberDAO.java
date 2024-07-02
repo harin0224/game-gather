@@ -19,4 +19,6 @@ public interface MemberDAO {
     void updateMember(MemberDTO memberDTO);
 
     void deleteMember(String id);
+
+    int getUserNoByUsername(String username);
 }

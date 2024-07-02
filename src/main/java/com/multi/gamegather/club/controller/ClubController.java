@@ -53,18 +53,17 @@ public class ClubController {
     public MessageDTO messageManager(
             @DestinationVariable int clubId,
             MessageDTO message,
-            Principal principal,
-            CustomUser currentUser
+            Principal principal
     ) throws Exception {
-        String username = principal.getName();
-        System.out.println("username " + username);
-        System.out.println("currentUser: " + ToStringBuilder.reflectionToString(currentUser, ToStringStyle.JSON_STYLE));
-        // 예시
-//        int userId = memberDAO.getUserByUserName(username);
-//        message.setSenderId(userId);
+        String userId = principal.getName();
+        System.out.println("userId " + userId);
+
+        int userNo = clubService.getUserNoByUsername(userId);   //userid로 userNo 가져오는게 아니고?
+        message.setSenderId(userNo);
+        message.setClubId(clubId);
+        System.out.println("Get From " + clubId + " send to " + message.getMessage());
 
         clubService.saveChat(clubId, message.getSenderId(), message.getMessage());
-        System.out.println("Get From " + clubId + " send to " + message.getMessage());
         return message;
     }
     
@@ -116,5 +115,16 @@ public class ClubController {
             @RequestBody ClubManagementDTO data
     ) {
          clubService.kickUser(data);
+    }
+
+    @GetMapping("/categories")
+    public List<ClubCategoryDTO> getAllCategories() {
+
+        List<ClubCategoryDTO> tempList = clubService.getAllCategories();
+        System.out.println("category" + clubService.getAllCategories());
+        System.out.println("list: " + ToStringBuilder.reflectionToString(tempList.get(0), ToStringStyle.JSON_STYLE));
+
+        return clubService.getAllCategories();
+
     }
 }

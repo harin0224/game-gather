@@ -10,7 +10,9 @@
 <!--        <result property="type" column="TYPE"/>-->
 <!--    </resultMap>-->
 
-
+    <select id="getAllCategories" resultType="com.multi.gamegather.club.model.dto.ClubCategoryDTO">
+        SELECT * FROM TB_CLUB_CATEGORY ORDER BY id
+    </select>
 
 
 
