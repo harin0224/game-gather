@@ -1,14 +1,10 @@
-let isIframeOpen = false;
-
 document.getElementById('randommatch').addEventListener('click', () => {
-  if (!isIframeOpen) {
     document.getElementById('iframecontent').src = '/match/match';
-    isIframeOpen = true;
-  }
-  else {
-    document.getElementById('iframecontent').src = '/rchat/rchat';
-    isIframeOpen = false;
-  }
+});
+
+//친구
+document.getElementById('friend').addEventListener('click', () => {
+    document.getElementById('iframecontent').src = '/friend/list';
 });
 
 //마이페이지

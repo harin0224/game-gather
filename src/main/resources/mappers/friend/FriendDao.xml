@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.gamegather.friend.model.dao.FriendDAO">
+
+	<resultMap id="FriendResultMap" type="com.multi.gamegather.friend.model.dto.FriendDTO"> <!-- db에서 받은 걸 dto로 result 값을 담아줌 dto에서 호출해서 쓰려고 -->
+		<id column="FRND_CODE" property="frCode" /> <!-- 수정할 것. 테이블 컬럼(DB컬럼), property(dto 컬럼이름) -->
+		<result column="USER_ID" property="userId" />
+		<result column="FRND_ID" property="frId" />
+		<result column="FRND_FLAG" property="frFlag" />
+	</resultMap>
+
+	<select id="selectFriendList" resultMap="FriendResultMap">
+		SELECT * FROM TB_FRND_LIST
+		WHERE USER_ID = #{userId}
+		  AND FRND_FLAG = #{frFlag}
+	</select>
+
+	<insert id="insertFriend">
+		INSERT INTO TB_FRND_LIST (FRND_CODE, USER_ID, FRND_ID, FRND_FLAG)
+		VALUES (#{frCode}, #{userId}, #{frId}, 'WAIT')
+	</insert>
+
+	<update id="updateFriendFlag">
+		UPDATE TB_FRND_LIST
+		SET FRND_FLAG = #{frFlag}
+		WHERE FRND_CODE = #{frCode}
+	</update>
+
+	<delete id="deleteFriend">
+		DELETE FROM TB_FRND_LIST WHERE FRND_CODE = #{frCode}
+	</delete>
+
+	<update id="updateFriendRequestStatus">
+		UPDATE TB_FRND_LIST
+		SET FRND_FLAG = #{frFlag}
+		WHERE USER_ID = #{userId} AND FRND_ID = #{frId}
+	</update>
+
+	<select id="findWaitingRequest" resultMap="FriendResultMap">
+		SELECT * FROM TB_FRND_LIST
+		WHERE USER_ID = #{userId}
+		  AND FRND_ID = #{frId}
+		  AND FRND_FLAG = 'WAIT'
+	</select>
+
+    <insert id="insertFriendFlagDouble">
+		INSERT INTO TB_FRND_LIST(FRND_CODE, USER_ID, FRND_ID, FRND_FLAG)
+		VALUES(#{frCode}, #{userId}, #{frId}, 'FR')
+	</insert>
+</mapper>

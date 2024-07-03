@@ -42,4 +42,12 @@ public class MemberService {
     public void deleteMember(String id) {
         memberDAO.deleteMember(id);
     }
+
+    public void incrementMannerCount(String userId) {
+        memberDAO.incrementMannerCount(userId);
+    }
+
+    public void incrementBanCount(String userId) {
+        memberDAO.incrementBanCount(userId);
+    }
 }

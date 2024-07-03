@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>가운데 빈 박스</title>
+    <title>GAME GATHER</title>
     <link rel="stylesheet" href="/css/match/matchchat.css">
     <link rel="stylesheet" href="/css/main/menubar.css">
+    <style>
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px; /* 로고와 box 사이의 간격 조정 */
+        }
+        .logo-container img {
+            max-width: 150px; /* 로고의 최대 너비 설정 */
+            height: auto; /* 비율 유지 */
+        }
+    </style>
 </head>
 
 <body>
+<div class="logo-container">
+    <img src="/img/logo.png" alt="로고">
+
 <div class="box">
     <div class="left">
         <div class="left-top">
@@ -14,7 +27,11 @@
                 <img src="/img/random.PNG" width="90" height="90" alt="randomicon">
             </button>
         </div>
-        <div class="left-top">hello2</div>
+        <div class="left-top">
+            <button id="friend" class="centered-container">
+                <img src="/img/person.PNG" width="90" height="90" alt="my">
+            </button>
+        </div>
         <div class="left-top">
             <button id="club" class="centered-container">
                 <img src="/img/club.PNG" width="90" height="90" alt="clubicon">
@@ -30,6 +47,7 @@
     <div class="right" id="right">
         <iframe id="iframecontent"></iframe>
     </div>
+</div>
 </div>
 
 <script src="/js/main/menubar.js"></script>

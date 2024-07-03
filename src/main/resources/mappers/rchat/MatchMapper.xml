@@ -37,8 +37,12 @@
             , #{ tag3 }
             , #{ age }
             )
-
-
     </insert>
 
+
+    <select id="countByGameName" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+        FROM TB_CATEGORY
+        WHERE USER_ID = #{userId} AND GAMENAME = #{gameName}
+    </select>
 </mapper>
