@@ -23,7 +23,7 @@ function connect() {
         return;
     }
 
-    var socket = new SockJS('/ws-websocket');
+    var socket = new SockJS('/fred-websocket');
     stompClient = Stomp.over(socket);
 
     // 3초 동안 연결 시도
@@ -39,7 +39,7 @@ function connect() {
         clearTimeout(connectionTimeout);
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/sub/rchat/' + roomId, function (greeting) { // 받을거
+        stompClient.subscribe('/sub/fredchat/' + roomId, function (greeting) { // 받을거
             console.log('greeting: ' + greeting);
             showGreeting(greeting);
         });
@@ -56,7 +56,7 @@ function disconnect() {
 
 function sendChatting() {
     let currentTime = new Date().toISOString(); // 현재 시간을 ISO 포맷으로 가져옵니다.
-    stompClient.send("/pub/rchat/" + roomId + "/hello", {}, JSON.stringify({
+    stompClient.send("/pub/fredchat/" + roomId + "/hello", {}, JSON.stringify({
         'chatting': $("#chatting").val(),
         'timestamp': currentTime // 타임스탬프 추가
     }));
@@ -74,7 +74,7 @@ function saveChatLogs() {
     console.log("Chat log to save: ", chatLogs);
 
     $.ajax({
-        url: "/rchat/save-chat-logs",
+        url: "/fred-websocket/save-chat-logs",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(chatLogs),
