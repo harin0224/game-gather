@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocked Friends</title>
+    <style>
+        .blocked-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .blocked-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .blocked-list button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Blocked Friends</h1>
+<ul class="blocked-list">
+    <li th:each="friend : ${blockedFriends}">
+        <span th:text="${friend.frId}">Friend ID</span>
+        <form th:action="@{/friend/unblock}" method="post" style="display: inline;">
+            <input type="hidden" name="frCode" th:value="${friend.frCode}">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <button type="submit">Unblock</button>
+        </form>
+    </li>
+</ul>
+<!--<button onclick="window.location.href='/friend/list?userId=' + '${userId}'">Back to Friend List</button>-->
+<a href="/friend/list" class="btn btn-primary">Go to Block List</a>
+</body>
+</html>

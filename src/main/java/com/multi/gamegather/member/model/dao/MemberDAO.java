@@ -2,6 +2,7 @@ package com.multi.gamegather.member.model.dao;
 
 import com.multi.gamegather.member.model.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface MemberDAO {
     void updateMember(MemberDTO memberDTO);
 
     void deleteMember(String id);
+
+    void incrementMannerCount(@Param("userId") String userId);
+
+    void incrementBanCount(@Param("userId") String userId);
 }

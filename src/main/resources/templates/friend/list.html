@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friend List</title>
+    <style>
+        .friend-list {
+            list-style-type: none;
+        }
+        .friend-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .friend-list button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Friend List</h1>
+<ul class="friend-list">
+    <li th:each="friend : ${friends}">
+        <span th:text="${friend.frId}">Friend ID</span>
+        <form th:action="@{/friend/update}" method="post" style="display: inline;">
+            <input type="hidden" name="frCode" th:value="${friend.frCode}">
+            <input type="hidden" name="frFlag" value="BLK">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <button type="submit">Block</button>
+        </form>
+        <form th:action="@{/friend/delete}" method="post" style="display: inline;">
+            <input type="hidden" name="frCode" th:value="${friend.frCode}">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+<form th:action="@{/friend/add}" method="post">
+    <input type="text" name="frId" placeholder="Enter Friend ID" required>
+    <input type="hidden" name="userId" th:value="${userId}">
+    <input type="hidden" name="frFlag" value="WAIT">
+    <button type="submit">Send Friend Request</button>
+</form>
+<a href="/friend/blocklist" class="btn btn-primary">View Blocked Friends</a>
+</body>
+</html>

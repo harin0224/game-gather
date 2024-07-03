@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CustomErrorController {
 
     @RequestMapping("/denied")
-    public  void accessDenied(){}
+    public void accessDenied(){}
 
     @PostMapping("/login")
     public void loginFailed(){}
 
+    @RequestMapping("/signup")
+    public void signup(){}
 
+    @RequestMapping("/match")
+    public void match(){}
 }

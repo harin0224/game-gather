@@ -24,4 +24,8 @@ public class MatchService {
         // 결과가 0보다 크면 등록에 성공한 것입니다.
         return result > 0 ? true :false;
     }
+
+    public int countByGameName(String userId, String gameName) {
+        return matchMapper.countByGameName(userId, gameName);
+    }
 }

@@ -17,17 +17,20 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-color: #4A6B8A; /* 박스 밖의 배경색 지정 */
 }
+
 .box {
-  width: 1470px; /* 가로 5% 늘림 */
-  height: 770px; /* 세로 10% 늘림 */
+  width: 1470px;
+  height: 770px;
   border: 2px inset black;
   display: flex;
   align-items: center;
   font-size: 50px;
   font-weight: bold;
-  position: relative; /* 상대 위치 설정 */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* 그림자 추가 */
+  position: relative;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff; /* 박스 내부의 배경색 지정 */
 }
 .box .left {
   width: 147px; /* 박스 가로 10분의 1 */

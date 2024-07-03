@@ -15,8 +15,44 @@
         <div class="col-md-4 offset-md-4 text-center">
             <img id="profile-img" src="" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
             <h3 id="user-name" class="mt-3"></h3>
-            <button id="member-info" class="btn btn-primary mt-2">Member Info</button>
-            <button id="delete-account" class="btn btn-danger mt-2">Delete Account</button>
+
+            <table class="table mt-3">
+                <tr>
+                    <th>매칭 횟수</th>
+                </tr>
+                <tr>
+                    <th>League of Legends Count</th>
+                    <td id="lol-count"></td>
+                </tr>
+                <tr>
+                    <th>Overwatch Count</th>
+                    <td id="overwatch-count"></td>
+                </tr>
+                <tr>
+                    <th>Battleground Count</th>
+                    <td id="battleground-count"></td>
+                </tr>
+                <tr>
+                    <th>Vallolant Count</th>
+                    <td id="vallolant-count"></td>
+                </tr>
+                <tr>
+                    <th>Lostark Count</th>
+                    <td id="lostark-count"></td>
+                </tr>
+                <tr>
+                    <th>Maplestory Count</th>
+                    <td id="maplestory-count"></td>
+                </tr>
+                <tr>
+                    <th>Goosegooseduck Count</th>
+                    <td id="goose-count"></td>
+                </tr>
+            </table>
+
+            <button id="member-info" class="btn btn-primary mt-2">회원 정보 수정</button>
+            <br>
+            <button id="delete-account" class="btn btn-danger mt-2">회원 탈퇴</button>
         </div>
     </div>
 </div>
@@ -26,8 +62,64 @@
             url: '/member/getCurrentUser',
             method: 'GET',
             success: function(data) {
-                $('#profile-img').attr('src', '/resources/profileIMG/' + data.profileIMG);
+                $('#profile-img').attr('src', '/member/profile-img/' + data.profileIMG);
                 $('#user-name').text(data.name);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countLeagueOfLegends',
+            method: 'GET',
+            success: function(data) {
+                $('#lol-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countOverwatch',
+            method: 'GET',
+            success: function(data) {
+                $('#overwatch-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countBattleground',
+            method: 'GET',
+            success: function(data) {
+                $('#battleground-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countVallolant',
+            method: 'GET',
+            success: function(data) {
+                $('#vallolant-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countLostark',
+            method: 'GET',
+            success: function(data) {
+                $('#lostark-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countMaplestory',
+            method: 'GET',
+            success: function(data) {
+                $('#maplestory-count').text(data);
+            }
+        });
+
+        $.ajax({
+            url: '/match/countGoosegooseduck',
+            method: 'GET',
+            success: function(data) {
+                $('#goose-count').text(data);
             }
         });
 
