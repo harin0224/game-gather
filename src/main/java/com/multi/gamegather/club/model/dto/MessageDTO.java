@@ -12,6 +12,8 @@ import lombok.Setter;
 public class MessageDTO {
     private String message;
     private int senderId;
+    private String senderName;
+    private int clubId;
 
     @Override
     public String toString() {

@@ -2,10 +2,7 @@ package com.multi.gamegather.club.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.gamegather.authentication.model.dto.CustomUser;
-import com.multi.gamegather.club.model.dao.ClubCategoryRelationMapper;
-import com.multi.gamegather.club.model.dao.ClubChatMapper;
-import com.multi.gamegather.club.model.dao.ClubManagementMapper;
-import com.multi.gamegather.club.model.dao.ClubMapper;
+import com.multi.gamegather.club.model.dao.*;
 import com.multi.gamegather.club.model.dto.*;
 import com.multi.gamegather.member.model.dao.MemberDAO;
 import com.multi.gamegather.member.model.dto.MemberDTO;
@@ -34,6 +31,7 @@ public class ClubService {
     private final ClubCategoryRelationMapper clubCategoryRelationMapper;
     private final ClubChatMapper clubChatMapper;
     private final MemberDAO memberDAO;
+    private final ClubCategoryMapper clubCategoryMapper;
     // 룸 목록, 필요없음
     // private Map<String, ClubRoom> clubRooms;
 //    private Map<String, ClubRoomDTO> clubRooms;
@@ -104,6 +102,11 @@ public class ClubService {
         // 2. 클럽 카테고리 관계 데이터 삭제
         clubCategoryRelationMapper.deleteClubCategoryRelationByClubId(clubId);
 
+
+        //2-1 chat log 지워줘
+        clubChatMapper.deleteClubChatByClubId(clubId);
+
+
         System.out.println("3");
         // 3. 클럽 삭제
         clubMapper.deleteClub(clubId);
@@ -117,9 +120,7 @@ public class ClubService {
     // 가입된 클럽 목록 가져오기
     @Transactional
     public List<ClubDTO> getClubList(int userId) {
-        System.out.println("service");
         List<ClubDTO> list = clubManagementMapper.findUserClubs(userId);
-
 
         for (ClubDTO club : list) {
             List<Integer> userIds = clubManagementMapper.findUserByClub(club.getId());
@@ -166,7 +167,6 @@ public class ClubService {
     public List<ChatLogDTO> getChat(int clubId) {
         System.out.println("clubId: " + clubId);
         List<ChatLogDTO> list = clubChatMapper.getChatLog(clubId);
-        System.out.println("list: " + ToStringBuilder.reflectionToString(list.get(0), ToStringStyle.JSON_STYLE));
         return list;
     }
 
@@ -177,4 +177,14 @@ public class ClubService {
         System.out.println("userId : " + userId + " clubId: " + clubId);
         clubManagementMapper.kickUser(userId, clubId);
     }
+
+    public int getUserNoByUsername(String username) {
+        return memberDAO.getUserNoByUsername(username);
+    }
+
+    public List<ClubCategoryDTO> getAllCategories() {
+        return clubCategoryMapper.getAllCategories();
+    }
+
+
 }

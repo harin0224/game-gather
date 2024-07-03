@@ -9,43 +9,112 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/club/club.css">
 
     <script src="/js/club/club.js"></script>
+    <style>
+
+        #club-bar{
+            position:position;
+            width:30%;
+        }
+
+        #main-view{
+            position:position;
+            width:70%;
+        }
+    </style>
 
 </head>
 <body>
+<div id="club-bar" class="border float-left">
+    <ul>
 
-<div id="clubList">
+    </ul>
+    <button id="create-club-btn" onclick="createClub()">Add Club</button>
 </div>
 
-<button id="getClubBtn" onclick="getClubList()">클럽 목록 가져오기</button>
+<!-- 메인 화면의 상단 바 클럽 이름을 보여줌 -->
+<div id="main-view" class="border float-left">
+    <div id="main-title" class="border">
+        <img src="" />
+        <span></span>
 
-<input id="currentClubId" type="number" placeholder="보내고싶은 클럽 id 입력">
-<input type="text" id="message"  placeholder="메세지 입력"/>
-<button id="sendMessageBtn" onclick="sendMessage()">메세지 보내기</button>
-
-
-<input id="deleteClubId" type="number" placeholder="지우고 싶은 클럽 id 입력">
-<button id="deleteClubBtn" onclick="deleteClub()">클럽 지우기</button>
-
-
-<button id="addClub" onclick="addClub()">클럽 추가</button>
-
-<input id="enterClub" placeholder="입장할 방 코드">
-<button id="enterClubBtn" onclick="enterClub()">입장</button>
-
-<input id="exitClub" type="number" placeholder="나가고 싶은 클럽 id 입력">
-<button id="exitClubBtn" onclick="exitClub()">클럽 나가기</button>
-
-<input id="loadClubChat" type="number" placeholder="대화 내역 가져올 클럽 id 입력">
-<button id="loadClubChatBtn" onclick="loadClubChat()">대화 내역 가져오기</button>
+        <div class=".float-right">
+            <button id="show-users" class="float-right"  style="display:none;" >
+            </button>
+            <div id="user-popup" class="user-popup hidden">
+                <!-- 팝업 창 내용 -->
+                <div class="dsad">
+                    허씨
+                    <button onclick="kickUser()">추방</button>
+                </div>
+            </div>
 
 
+        </div>
 
+    </div>
 
-<input id="kickClubId" type="number" placeholder="추방할 클럽 id 입력">
-<input id="kickUserId" type="number" placeholder="추방할 사람 id 입력">
-<button id="kickBtn" onclick="kickUser()">추방</button>
+    <!-- 메세지를 보여주는 메인 div -->
+    <div id="main-chat" class="border">
+        <!-- 메세지를 보여주는 div -->
+<!--        <div class="main-chat-message-div">메세지1</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+<!--        <div class="main-chat-message-div">메세지2</div>-->
+    </div>
+
+    <div id="bottom-chat" class="border">
+        <input class="float-left widht-60" type="text" id="chat-input" />
+        <button id="sendMessageBtn" class="float-right" >보내기</button>
+    </div>
+</div>
+
+<!-- 우클릭시 띄어주는 메뉴 -->
+<div id="custom-menu" class="custom-menu">
+    <ul>
+        <li id="copyClub">모임 초대 링크 복사</li>
+        <li id="outClub">모임 탈퇴</li>
+        <li id="deleteClub" style="display:none;">모임 삭제(관리자)</li>
+    </ul>
+</div>
+
+<!-- 클럽 추가 팝업 -->
+<div id="add-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 추가</h2>
+        <button onclick="showJoinClub()">클럽 가입하기</button>
+        <button onclick="showCreateClub()">클럽 생성하기</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
+
+<!-- 클럽 가입 팝업 -->
+<div id="join-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 가입하기</h2>
+        <input type="text" id="club-code" placeholder="클럽 코드 입력" />
+        <button onclick="enterClub()">가입</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
+
+<!-- 클럽 생성 팝업 -->
+<div id="create-club-popup" class="popup">
+    <div class="popup-content">
+        <h2>클럽 생성하기</h2>
+        <input type="text" id="club-name" placeholder="서버 이름" />
+        <div class="description-container">
+<!--            <textarea id="club-description" placeholder="설명" readonly></textarea>-->
+        <select id="category-list" multiple>
+
+        </select>
+        </div>
+        <button onclick="addClub()">생성</button>
+        <button onclick="closePopup()">취소</button>
+    </div>
+</div>
 
 </body>
 </html>

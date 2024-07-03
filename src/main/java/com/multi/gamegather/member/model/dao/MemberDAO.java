@@ -21,7 +21,10 @@ public interface MemberDAO {
 
     void deleteMember(String id);
 
+    int getUserNoByUsername(String username);
+
     void incrementMannerCount(@Param("userId") String userId);
 
     void incrementBanCount(@Param("userId") String userId);
+
 }

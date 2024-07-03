@@ -6,8 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ClubCategoryRelationDTO {
-    private String id;
-    private String clubId;
-    private String userId;
-    private String role;
+    private int id;
+    private int clubId;
+    private int categoryId;
 }

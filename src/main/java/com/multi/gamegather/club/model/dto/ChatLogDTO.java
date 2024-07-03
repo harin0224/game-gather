@@ -11,4 +11,5 @@ public class ChatLogDTO {
     private int userId;
     private String chatLog;
     private String createdAt;
+    private String userIdFromUsersTable;
 }
