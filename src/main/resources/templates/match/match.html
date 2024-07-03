@@ -5,11 +5,12 @@
     <title>Title</title>
     <!--    <link rel="stylesheet" href="css/styles.css">-->
     <link rel="stylesheet" href="/css/match/match.css">
+    <link rel="stylesheet" href="/css/match/matchview.css">
 
 </head>
 <body>
 
-<div class="section over-hide z-bigger">
+
     <form action="/match/match" method="post">
         <div class="background-color"></div>
         <div class="section over-hide z-bigger">
@@ -193,28 +194,14 @@
                             <i class='uil uil-image-resize-landscape'></i>
                             50대 이상
                         </label>
-                        <br>
-                        <br>
-                        <label class="text-black">---------->></label>
-                        <input type="submit" value="시작하기" class="btn-submit" onclick="alert('★설정이완료되었습니다. 즐거운시간보내세요!★')">
-<!--                        <a href="/rchat/rchat"><button>여기를 클릭하세요</button></a>-->
-
-<!--                        <button type="submit" class="btn-submit" id="rchatstart">매칭시작</button>-->
-
-                        <label class="text-black"><<----------</label>
 
 
-<!--                        <script>-->
-<!--                            const rchatstart = document.getElementById('rchatstart');-->
-
-<!--                            rchatstart.addEventListener('click', () => {-->
-<!--                              // 부모 iframe의 src 속성 변경-->
-<!--                              window.parent.document.getElementById('iframecontent').src = '/templates/fredchat/fredchat.html';-->
-<!--                            });-->
-<!--                        </script>-->
 
                     </div>
+                    <label class="text-black">---------->></label>
+                    <input type="submit" value="시작하기" class="btn-submit" onclick="alert('★설정이완료되었습니다. 즐거운시간보내세요!★')">
 
+                    <label class="text-black"><<----------</label>
                 </div>
 
             </div>
@@ -222,16 +209,7 @@
         </div>
         <script src="/js/match/matchchat.js"></script>
     </form>
-    <button id="rchatstart-1" class="btn-submit" >매칭시작</button>
+
 </div>
-<script>
-
-    $('#rchatstart-1').click(function() {
-window.location.href = '/fredchat/fredchat';
-});
-</script>
-
-
-
 </body>
 </html>

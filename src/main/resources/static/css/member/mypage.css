@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    background-color: #0a0a0a;
+    font-family: 'Share Tech Mono', monospace;
+    color: #0ff;
+    line-height: 1.6;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.03) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    background-color: rgba(10, 10, 10, 0.8);
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    border: 1px solid #0ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(0,255,255,0) 0%,
+        rgba(0,255,255,0.1) 50%,
+        rgba(0,255,255,0) 100%
+    );
+    animation: hologram 10s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes hologram {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+h2, h3, h5 {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+h3, h5 {
+    margin-bottom: 20px;
+}
+
+#profile-img {
+    border: 2px solid #0ff;
+    box-shadow: 0 0 15px #0ff;
+}
+
+.table {
+    color: #0ff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0ff;
+    border-radius: 5px;
+    margin-bottom: 25px;
+}
+
+.table th, .table td {
+    border-top: 1px solid #0ff;
+}
+
+.table th {
+    text-shadow: 0 0 5px #0ff;
+}
+
+.btn {
+    background-color: transparent;
+    color: #0ff;
+    border: 2px solid #0ff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+.btn:hover {
+    background-color: #0ff;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+}
+
+.btn-danger {
+    border-color: #ff4136;
+    color: #ff4136;
+}
+
+.btn-danger:hover {
+    background-color: #ff4136;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px #ff4136, 0 0 40px #ff4136;
+}
+
+#user-name {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+}
+
+#member-info, #delete-account {
+    margin-top: 10px;
+}

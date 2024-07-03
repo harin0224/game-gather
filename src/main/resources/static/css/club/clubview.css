@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #0a0a0a;
+    font-family: 'Share Tech Mono', monospace;
+    color: #0ff;
+    line-height: 1.6;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.03) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+}
+
+#club-bar {
+    width: 30%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.8);
+    border-right: 1px solid #0ff;
+}
+
+#main-view {
+    width: 66%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.6);
+}
+
+#main-title {
+    padding: 10px;
+    height: 10%;
+    background-color: rgba(0, 255, 255, 0.1);
+    border-bottom: 1px solid #0ff;
+}
+
+#main-chat {
+    height: 70%;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+.border {
+    border: 1px solid #0ff;
+}
+
+.user-popup, .popup-only-user, .custom-menu, .popup-content, .category-list {
+    background-color: rgba(10, 10, 10, 0.9);
+    border: 1px solid #0ff;
+    box-shadow: 0 0 10px #0ff;
+    color: #0ff;
+}
+
+.float-left { float: left; }
+.float-right { float: right; }
+.widht-60 { width: 60%; }
+
+#club-bar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#club-bar li, .custom-menu li, .category-list div {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#club-bar li:hover, .custom-menu li:hover, .category-list div:hover {
+    background-color: rgba(0, 255, 255, 0.2);
+    text-shadow: 0 0 5px #0ff;
+}
+
+.popup {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+    background-color: rgba(10, 10, 10, 0.9);
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #0ff;
+}
+
+.popup-content h2 {
+    margin-top: 0;
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+}
+
+.popup-content input,
+.popup-content textarea,
+.popup-content select {
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 5px;
+}
+
+.popup-content button, #create-club-btn, #sendMessageBtn {
+    background-color: transparent;
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.popup-content button:hover, #create-club-btn:hover, #sendMessageBtn:hover {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 10px #0ff;
+}
+
+#chat-input {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 5px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0ff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00cccc;
+}
+
+/* Additional Cyberpunk Effects */
+@keyframes neon-glow {
+    0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #0ff; }
+    100% { text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff; }
+}
+
+h2, #main-title span {
+    animation: neon-glow 1.5s ease-in-out infinite alternate;
+}
+
+.hidden { display: none; }
+.show { display: block; }

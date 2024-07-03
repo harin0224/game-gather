@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    background-color: #0a0a0a;
+    font-family: 'Share Tech Mono', monospace;
+    color: #0ff;
+    line-height: 1.6;
+    background-image:
+        linear-gradient(rgba(0, 255, 255, 0.03) 2px, transparent 2px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: rgba(10, 10, 10, 0.8);
+    border-radius: 15px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    border: 1px solid #0ff;
+    position: relative;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    animation: glitch 5s infinite;
+}
+
+.friend-list, .blocked-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friend-list li, .blocked-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: rgba(0, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.friend-list li:hover, .blocked-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+.friend-list span, .blocked-list span {
+    flex-grow: 1;
+    font-size: 1.1em;
+    text-shadow: 0 0 5px #0ff;
+}
+
+button, .btn {
+    background-color: transparent;
+    color: #0ff;
+    border: 2px solid #0ff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+button:hover, .btn:hover {
+    background-color: #0ff;
+    color: #0a0a0a;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+}
+
+form {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="text"] {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+input[type="text"]:focus {
+    box-shadow: 0 0 15px #0ff;
+    outline: none;
+}
+
+.btn-primary {
+    display: block;
+    width: 200px;
+    margin: 30px auto 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+@keyframes glitch {
+    0% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+    1% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+    2% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+    3% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+    4% { text-shadow: 3px 0 0 red, -3px 0 0 blue; }
+    5% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    6% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    7% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    8% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    9% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    10% { text-shadow: -3px 0 0 red, 3px 0 0 blue; }
+    11% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+    12% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+    13% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+    14% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+    15% { text-shadow: 1px 0 0 red, -1px 0 0 blue; }
+    16% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+    17% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+    18% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+    19% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+    20% { text-shadow: -1px 0 0 red, 1px 0 0 blue; }
+}

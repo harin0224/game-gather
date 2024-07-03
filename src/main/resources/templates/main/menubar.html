@@ -2,23 +2,84 @@
 <html lang="en">
 <head>
     <title>GAME GATHER</title>
-    <link rel="stylesheet" href="/css/match/matchchat.css">
+<!--    <link rel="stylesheet" href="/css/match/matchchat.css">-->
     <link rel="stylesheet" href="/css/main/menubar.css">
     <style>
+        .logo-link {
+            display: inline-block;
+            cursor: pointer;
+        }
         .logo-container {
             text-align: center;
-            margin-bottom: 20px; /* 로고와 box 사이의 간격 조정 */
+            margin-bottom: 5px; /* 로고와 box 사이의 간격 증가 */
+            padding: 0px 0; /* 상하 여백 추가 */
         }
         .logo-container img {
-            max-width: 150px; /* 로고의 최대 너비 설정 */
+            max-width: 300px; /* 로고의 최대 너비 증가 */
+            width: 100%; /* 컨테이너 너비에 맞춤 */
             height: auto; /* 비율 유지 */
+        }
+            .cyberpunk-logo {
+            max-width: 500px; /* 로고 최대 크기 증가 */
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 10px #00f3ff) brightness(1.2);
+            transition: all 0.3s ease;
+        }
+        .cyberpunk-logo:hover {
+            filter: drop-shadow(0 0 15px #ff00ff) brightness(1.4);
+            transform: scale(1.05);
+            animation: glitch 0.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+            20% {
+                transform: translate(-5px, 5px);
+            }
+            40% {
+                transform: translate(-5px, -5px);
+            }
+            60% {
+                transform: translate(5px, 5px);
+            }
+            80% {
+                transform: translate(5px, -5px);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        /* 반응형 디자인을 위한 미디어 쿼리 조정 */
+        @media (max-width: 1200px) {
+            .cyberpunk-logo {
+                max-width: 400px;
+            }
+        }
+
+        /* 반응형 디자인을 위한 미디어 쿼리 */
+        @media (max-width: 768px) {
+            .logo-container img {
+                max-width: 250px; /* 작은 화면에서 로고 크기 조정 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container img {
+                max-width: 200px; /* 더 작은 화면에서 로고 크기 조정 */
+            }
         }
     </style>
 </head>
 
 <body>
 <div class="logo-container">
-    <img src="/img/logo.png" alt="로고">
+    <a href="/main/menubar" class="logo-link">
+        <img src="/img/logo.png" alt="로고" class="cyberpunk-logo">
+    </a>
 
 <div class="box">
     <div class="left">

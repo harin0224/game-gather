@@ -17,4 +17,4 @@ spring-boot:
     jvmArguments: -parameters
 
 file:
-  upload-dir: C:/Users/ShinHyeoncheol/Documents/profileIMG
+  upload-dir: C:/Users/21928199/Documents/profileIMG
