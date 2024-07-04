@@ -3,7 +3,7 @@
 
 ## 🖥️ 팀원 소개
 |<img src="https://avatars.githubusercontent.com/Shin-Hyeoncheol" width=90px alt="신현철"/> | <img src="https://avatars.githubusercontent.com/harin0224" width=90px alt="안혜선"/> | <img src="https://avatars.githubusercontent.com/jmp0422" width=90px alt="박재민"/> | <img src="https://avatars.githubusercontent.com/supreme4rest" width=90px alt="이은수"/> | 
-| :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+| :-----: | :-----: | :-----: | :-----: |
 |  [신현철](https://github.com/Shin-Hyeoncheol) | [안혜선](https://github.com/harin0224) | [박재민](https://github.com/jmp0422) | [이은수](https://github.com/supreme4rest) | 
 
 
