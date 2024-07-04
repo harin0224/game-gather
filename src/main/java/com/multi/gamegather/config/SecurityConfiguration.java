@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                 .csrf((auth) -> auth.disable()
                 )
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/member/login", "/member/signup").permitAll()
+                        .requestMatchers("/member/login", "/member/findUserAndChangePwd", "/member/findUserIdPwdForm","/member/signup").permitAll()
                         .anyRequest().authenticated()
 //                        .anyRequest().permitAll()
                 );

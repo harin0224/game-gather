@@ -50,4 +50,13 @@ public class MemberService {
     public void incrementBanCount(String userId) {
         memberDAO.incrementBanCount(userId);
     }
+
+    public MemberDTO findUserByDetails(MemberDTO memberDTO) {
+        return memberDAO.findUserByDetails(memberDTO.getName(), memberDTO.getTel(), memberDTO.getGender());
+    }
+
+    public void changePassword(String userId, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        memberDAO.updatePassword(userId, encodedPassword);
+    }
 }

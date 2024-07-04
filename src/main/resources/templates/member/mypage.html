@@ -11,42 +11,47 @@
     <link rel="stylesheet" href="/css/member/mypage.css">
 </head>
 <body>
+<br>
+<br>
+<br>
+
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-4 offset-md-4 text-center">
             <img id="profile-img" src="" alt="Profile Image" class="img-thumbnail" style="width: 150px; height: 150px;">
             <h3 id="user-name" class="mt-3"></h3>
+            <h3 id="manner-count" class="mt-3"></h3>
 
             <table class="table mt-3">
                 <tr>
                     <th>매칭 횟수</th>
                 </tr>
                 <tr>
-                    <th>League of Legends Count</th>
+                    <th>League of Legends</th>
                     <td id="lol-count"></td>
                 </tr>
                 <tr>
-                    <th>Overwatch Count</th>
+                    <th>Overwatch</th>
                     <td id="overwatch-count"></td>
                 </tr>
                 <tr>
-                    <th>Battleground Count</th>
+                    <th>Battleground</th>
                     <td id="battleground-count"></td>
                 </tr>
                 <tr>
-                    <th>Vallolant Count</th>
+                    <th>Vallolant</th>
                     <td id="vallolant-count"></td>
                 </tr>
                 <tr>
-                    <th>Lostark Count</th>
+                    <th>Lostark</th>
                     <td id="lostark-count"></td>
                 </tr>
                 <tr>
-                    <th>Maplestory Count</th>
+                    <th>Maplestory</th>
                     <td id="maplestory-count"></td>
                 </tr>
                 <tr>
-                    <th>Goosegooseduck Count</th>
+                    <th>Goosegooseduck</th>
                     <td id="goose-count"></td>
                 </tr>
             </table>
@@ -65,6 +70,7 @@
             success: function(data) {
                 $('#profile-img').attr('src', '/member/profile-img/' + data.profileIMG);
                 $('#user-name').text(data.name);
+                $('#manner-count').text('Manner Count: ' + data.mannerCount);
             }
         });
 

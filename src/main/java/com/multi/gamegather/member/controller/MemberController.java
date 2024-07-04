@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -36,6 +38,11 @@ public class MemberController {
     @RequestMapping("/login")
     public void login() {
 
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        return "redirect:/member/login";
     }
 
     @GetMapping("/signup")
@@ -173,6 +180,16 @@ public class MemberController {
         return "member/findUserIdPwd";
     }
 
+    @PostMapping("/findUserIdPwd")
+    public ResponseEntity<?> findUserIdPwd(@RequestBody MemberDTO memberDTO) {
+        MemberDTO member = memberService.findUser(memberDTO);
+        if (member != null) {
+            return ResponseEntity.ok(member);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
     @GetMapping("/getCurrentUser")
     @ResponseBody
     public ResponseEntity<MemberDTO> getCurrentUser(@AuthenticationPrincipal CustomUser customUser) {
@@ -198,7 +215,6 @@ public class MemberController {
         }
     }
 
-
     @PostMapping("/incrementMannerCount")
     public ModelAndView incrementMannerCount(@RequestParam("userId") String userId) {
         memberService.incrementMannerCount(userId);
@@ -209,5 +225,34 @@ public class MemberController {
     public ModelAndView incrementBanCount(@RequestParam("userId") String userId) {
         memberService.incrementBanCount(userId);
         return new ModelAndView("redirect:/success/ban");
+    }
+
+    @RequestMapping("/findUserAndChangePwd")
+    public void findUserAndChangePwd() {
+
+    }
+
+    @PostMapping("/changePassword")
+    @ResponseBody
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> payload) {
+        String userId = payload.get("userId");
+        String name = payload.get("name");
+        String tel = payload.get("tel");
+        String gender = payload.get("gender");
+        String newPassword = payload.get("newPassword");
+
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(userId);
+        memberDTO.setName(name);
+        memberDTO.setTel(tel);
+        memberDTO.setGender(gender);
+
+        MemberDTO member = memberService.findUserByDetails(memberDTO);
+        if (member != null) {
+            memberService.changePassword(userId, newPassword);
+            return ResponseEntity.ok("Password changed successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
     }
 }

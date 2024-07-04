@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/friend/friend.css">
-    <title>Blocked Friends</title>
+    <title>차단목록</title>
     <style>
         .blocked-list {
             list-style-type: none;
@@ -21,18 +21,18 @@
     </style>
 </head>
 <body>
-<h1>Blocked Friends</h1>
+<h1>차단목록</h1>
 <ul class="blocked-list">
     <li th:each="friend : ${blockedFriends}">
-        <span th:text="${friend.frId}">Friend ID</span>
+        <span th:text="${friend.frId}">친구아이디</span>
         <form th:action="@{/friend/unblock}" method="post" style="display: inline;">
             <input type="hidden" name="frCode" th:value="${friend.frCode}">
             <input type="hidden" name="userId" th:value="${userId}">
-            <button type="submit">Unblock</button>
+            <button type="submit">차단해제</button>
         </form>
     </li>
 </ul>
-<!--<button onclick="window.location.href='/friend/list?userId=' + '${userId}'">Back to Friend List</button>-->
-<a href="/friend/list" class="btn btn-primary">Go to Block List</a>
+
+<a href="/friend/list" class="btn btn-primary">친구목록으로</a>
 </body>
 </html>

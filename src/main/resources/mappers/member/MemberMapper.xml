@@ -112,6 +112,10 @@
         UPDATE TB_USERS SET USER_BAN_COUNT = USER_BAN_COUNT + 1 WHERE USER_ID = #{userId}
     </update>
 
+    <update id="updatePassword">
+        UPDATE TB_USERS SET USER_PASSWORD = #{newPassword} WHERE USER_ID = #{userId}
+    </update>
+
     <!-- 혜선 -->
     <select id="findMemberByNos" resultMap="memberResultMap">
         SELECT

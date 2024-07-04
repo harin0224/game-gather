@@ -15,6 +15,8 @@ public interface MemberDAO {
 
     MemberDTO findUserByDetails(String userName, String userTel, String userGender);
 
+    void updatePassword(@Param("userId") String userId, @Param("newPassword") String newPassword);
+
     void insertMember(MemberDTO member);
 
     void updateMember(MemberDTO memberDTO);
