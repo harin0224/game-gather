@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/friend/friend.css">
+    <title>친구목록</title>
+    <style>
+        .friend-list {
+            list-style-type: none;
+        }
+        .friend-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .friend-list button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>친구목록</h1>
+<ul class="friend-list">
+    <li th:each="friend : ${friends}">
+        <span th:text="${friend.frId}">친구아이디</span>
+        <form th:action="@{/friend/update}" method="post" style="display: inline;">
+            <input type="hidden" name="frCode" th:value="${friend.frCode}">
+            <input type="hidden" name="frFlag" value="BLK">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <button type="submit">차단</button>
+        </form>
+        <form th:action="@{/friend/delete}" method="post" style="display: inline;">
+            <input type="hidden" name="frCode" th:value="${friend.frCode}">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <button type="submit">삭제</button>
+        </form>
+    </li>
+</ul>
+<form th:action="@{/friend/add}" method="post">
+    <input type="text" name="frId" placeholder="Friend ID를 입력하세요" required>
+    <input type="hidden" name="userId" th:value="${userId}">
+    <input type="hidden" name="frFlag" value="WAIT">
+    <button type="submit">친구추가</button>
+</form>
+<a href="/friend/blocklist" class="btn btn-primary">차단목록보기</a>
+</body>
+</html>

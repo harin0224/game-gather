@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class ClubCategoryDTO {
     private int id;
-    private int clubId;
-    private int userId;
-    private String role;
+    private String title;
+    private String type;
 }

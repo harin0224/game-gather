@@ -4,15 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.multi.gamegather.club.model.dao.ClubChatMapper"><!-- 메퍼위치하고  동일하게 네임스페이스 작성-->
+
+
+
+    <delete id="deleteClubChatByClubId">
+        DELETE FROM TB_CLUB_CHAT WHERE CLUB_ID = #{clubId}
+    </delete>
+
     <!-- 채팅 기록 저장 -->
     <insert id="saveChat">
         INSERT INTO TB_CLUB_CHAT(CLUB_ID, USER_ID, CHAT_LOG) VALUES (#{clubId}, #{userId}, #{message})
     </insert>
 
     <select id="getChatLog">
+<!--        SELECT-->
+<!--            id, club_id as clubId, user_id as userId, chat_log as chatLog, create_at as createdAt-->
+<!--        FROM TB_CLUB_CHAT WHERE CLUB_ID = #{clubId} ORDER BY CREATE_AT ASC-->
         SELECT
-            id, club_id as clubId, user_id as userId, chat_log as chatLog, create_at as createdAt
-        FROM TB_CLUB_CHAT WHERE CLUB_ID = #{clubId} ORDER BY CREATE_AT ASC
+            chat.id,
+            chat.club_id AS clubId,
+            chat.user_id AS userId,
+            chat.chat_log AS chatLog,
+            chat.create_at AS createdAt,
+            users.user_id AS  userIdFromUsersTable
+        FROM
+            TB_CLUB_CHAT chat
+            JOIN
+                TB_USERS users
+            ON  chat.user_id = users.user_no
+        WHERE
+            chat.club_id = #{clubId}
+        ORDER BY
+
+        chat.create_at ASC
     </select>
 
 </mapper>

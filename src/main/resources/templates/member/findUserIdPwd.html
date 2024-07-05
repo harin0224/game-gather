@@ -5,6 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/member/sign.css">
     <title>Find User ID / Password</title>
     <style>
         h5 {
@@ -18,7 +19,7 @@
 </head>
 <body>
 <br>
-<h1 align="center">Game Gather</h1>
+<h1 align="center">아이디 찾기</h1>
 <br><br><br>
 <div align="center">
     <form id="findIdPwdForm">
@@ -75,10 +76,11 @@
                 }),
                 contentType: "application/json",
                 success: function(response) {
-                    alert("User ID: " + response.id + "\nPassword: " + response.pwd);
+                    alert("아이디 : " + response.id);
+                    window.location.href = "/member/login";
                 },
                 error: function(xhr, status, error) {
-                    alert("User not found");
+                    alert("정보를 찾을 수 없습니다.");
                 }
             });
         });

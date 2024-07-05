@@ -10,5 +10,7 @@ import java.util.List;
 public interface ClubChatMapper {
     void saveChat(int clubId, int userId, String message);
 
+    void deleteClubChatByClubId(int clubId);
+
     List<ChatLogDTO> getChatLog(int clubId);
 }

@@ -5,6 +5,8 @@ import com.multi.gamegather.club.model.dao.ClubChatMapper;
 import com.multi.gamegather.club.model.dto.*;
 import com.multi.gamegather.club.service.ClubService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
+import java.security.Principal;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -49,10 +52,18 @@ public class ClubController {
     @SendTo("/sub/club/receive-message/{clubId}")
     public MessageDTO messageManager(
             @DestinationVariable int clubId,
-            MessageDTO message
+            MessageDTO message,
+            Principal principal
     ) throws Exception {
-        clubService.saveChat(clubId, message.getSenderId(), message.getMessage());
+        String userId = principal.getName();
+        System.out.println("userId " + userId);
+
+        int userNo = clubService.getUserNoByUsername(userId);   //userid로 userNo 가져오는게 아니고?
+        message.setSenderId(userNo);
+        message.setClubId(clubId);
         System.out.println("Get From " + clubId + " send to " + message.getMessage());
+
+        clubService.saveChat(clubId, message.getSenderId(), message.getMessage());
         return message;
     }
     
@@ -104,5 +115,16 @@ public class ClubController {
             @RequestBody ClubManagementDTO data
     ) {
          clubService.kickUser(data);
+    }
+
+    @GetMapping("/categories")
+    public List<ClubCategoryDTO> getAllCategories() {
+
+        List<ClubCategoryDTO> tempList = clubService.getAllCategories();
+        System.out.println("category" + clubService.getAllCategories());
+        System.out.println("list: " + ToStringBuilder.reflectionToString(tempList.get(0), ToStringStyle.JSON_STYLE));
+
+        return clubService.getAllCategories();
+
     }
 }

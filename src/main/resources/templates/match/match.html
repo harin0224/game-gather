@@ -5,11 +5,12 @@
     <title>Title</title>
     <!--    <link rel="stylesheet" href="css/styles.css">-->
     <link rel="stylesheet" href="/css/match/match.css">
+    <link rel="stylesheet" href="/css/match/matchview.css">
 
 </head>
 <body>
 
-<div class="section over-hide z-bigger">
+
     <form action="/match/match" method="post">
         <div class="background-color"></div>
         <div class="section over-hide z-bigger">
@@ -32,9 +33,9 @@
                             <i class='uil uil-vector-square'></i>
                             오버워치
                         </label><!--
-						--><input class="checkbox-tools" type="radio" name="gamename" id="battleground-3"
+						--><input class="checkbox-tools" type="radio" name="gamename" id="battleground"
                                   value="battleground">
-                        <label class="for-checkbox-tools" for="battleground-3">
+                        <label class="for-checkbox-tools" for="battleground">
                             <i class='uil uil-ruler'></i>
                             배틀그라운드
                         </label><!--
@@ -193,27 +194,14 @@
                             <i class='uil uil-image-resize-landscape'></i>
                             50대 이상
                         </label>
-                        <br>
-                        <br>
-                        <label class="text-black">---------->></label>
-                        <input type="submit" value="설정완료" class="btn-submit" onclick="alert('★랜덤매칭버튼을 한번더 눌러주세요!★')">
-<!--                        <a href="/rchat/rchat"><button>여기를 클릭하세요</button></a>-->
-<!--                        <button id="rchatstart" class="btn-submit" >매칭시작</button>-->
-<!--                        <button type="submit" class="btn-submit" id="rchatstart">매칭시작</button>-->
-                        <label class="text-black"><<----------</label>
 
 
-<!--                        <script>-->
-<!--                            const rchatstart = document.getElementById('rchatstart');-->
-
-<!--                            rchatstart.addEventListener('click', () => {-->
-<!--                              // 부모 iframe의 src 속성 변경-->
-<!--                              window.parent.document.getElementById('iframecontent').src = '/templates/rchat/rchat.html';-->
-<!--                            });-->
-<!--                        </script>-->
 
                     </div>
+                    <label class="text-black">---------->></label>
+                    <input type="submit" value="시작하기" class="btn-submit" onclick="alert('★설정이완료되었습니다. 즐거운시간보내세요!★')">
 
+                    <label class="text-black"><<----------</label>
                 </div>
 
             </div>
@@ -221,7 +209,7 @@
         </div>
         <script src="/js/match/matchchat.js"></script>
     </form>
-</div>
 
+</div>
 </body>
 </html>
