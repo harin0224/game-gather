@@ -25,34 +25,23 @@
 |  [신현철](https://github.com/Shin-Hyeoncheol) | [안혜선](https://github.com/harin0224) | [박재민](https://github.com/jmp0422) | [이은수](https://github.com/supreme4rest) | 
 
 
+## WBS
+![image](https://github.com/user-attachments/assets/cac1fe4d-82aa-405e-a30a-deb29a3ba06f)
 
-
+## 실 개발 일정
+![image](https://github.com/user-attachments/assets/4ae81eed-bc44-42a3-97d4-0dab624445ec)
 
 ## 기술 스택
-![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![image](https://github.com/user-attachments/assets/f543fc45-7bcc-4f6c-b4ee-b25daf8b5e7c)
 
 ## ERD
-- ERD 이미지 또는 링크 추가 예정
+![image](https://github.com/user-attachments/assets/7f2c06c1-7381-4dd5-ac7f-0ec17cfe034d)
 
-## Service Architecture
-- Service Architecture 이미지 또는 링크 추가 예정
+## 유스케이스 다이어그램
+![image](https://github.com/user-attachments/assets/6435ae88-fe00-4f8e-bc6b-ce8150341d42)
 
-## 프로젝트 구조
-- 프로젝트 구조 설명 또는 디렉토리 구조 추가 예정
+## 팀원 간 역할분담
+![image](https://github.com/user-attachments/assets/944adf3a-02e8-417a-bc05-63a1344fed8a)
 
-## 설치 및 실행 방법
-- 프로젝트 설치 및 실행 방법 설명 예정
-
-## 기여 방법
-- 기여 방법 및 가이드라인 설명 예정
-
-## 라이선스
-- 프로젝트 라이선스 명시 예정
-
-## 연락처
-- 팀 이메일: team@example.com
-- 팀 웹사이트: https://team.example.com
+### 📌PART 3. 시연영상 <hr>
+[여기를 클릭하여 동영상 보기](https://drive.google.com/file/d/1e9GmwZhhw9rhnQg4E1TmejJ2uKH8-_SY/view?usp=sharing)
