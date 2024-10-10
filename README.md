@@ -44,4 +44,4 @@
 ![image](https://github.com/user-attachments/assets/944adf3a-02e8-417a-bc05-63a1344fed8a)
 
 ### 📌PART 3. 시연영상 <hr>
-[여기를 클릭하여 동영상 보기](https://drive.google.com/file/d/1e9GmwZhhw9rhnQg4E1TmejJ2uKH8-_SY/view?usp=sharing)
+[여기를 클릭하여 동영상 보기](https://drive.google.com/file/d/1HwBfMg7XXUCmOscRc1Ag2eVDHEe2poNe/view?usp=drive_link)
